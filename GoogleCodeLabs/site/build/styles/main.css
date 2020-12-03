@@ -544,7 +544,7 @@ ul, li {
   display: flex;
   align-items: center;
   height: 64px;
-  background-color: #455a64;
+  background-color: #fff;
   color: #fff;
   padding: 16px;
 }
@@ -588,12 +588,12 @@ ul, li {
 
 @media (min-width: 768px) {
   #searchbar {
-    background-color: #546E7A;
+    background-color: #5BA63C;
     transition: background-color 400ms cubic-bezier(0, 0, 0.2, 1);
     width: 100%;
   }
   #searchbar:hover {
-    background-color: #78909C;
+    background-color: #5BA66A;
   }
   .logo-devs {
     margin: 5px 32px 0 0;
