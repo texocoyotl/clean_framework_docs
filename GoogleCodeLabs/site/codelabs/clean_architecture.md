@@ -1,7 +1,6 @@
 summary: Clean Architecture
-id: 
-categories: 
-tags: 
-status:  
-authors: 
-Feedback Link: 
+id: 0000001
+categories: Mobile Development with Flutter
+tags: CLEAN Framework, Flutter, CLEAN Archiecture
+status:  Active
+authors: Eric Narvaez
