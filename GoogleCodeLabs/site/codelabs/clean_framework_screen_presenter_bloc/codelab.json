@@ -3,12 +3,12 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "updated": "2020-04-21T00:00:00-05:00",
-  "id": "clean_architecture_screen_presenter_bloc",
-  "duration": 20,
-  "title": "CLEAN Architecture - Screen - Presenter - Bloc",
+  "id": "clean_framework_screen_presenter_bloc",
+  "duration": 35,
+  "title": "Screen - Presenter - Bloc",
   "authors": "Eric Narvaez",
-  "summary": "CLEAN Architecture - Screen - Presenter - Bloc",
-  "source": "clean_architecture_screen_presenter_bloc.md",
+  "summary": "Screen - Presenter - Bloc",
+  "source": "clean_framework_screen_presenter_bloc.md",
   "theme": "",
   "status": [
     "published"
@@ -20,7 +20,7 @@
   ],
   "tags": [
     "CLEAN",
-    "CLEAN Architecture",
+    "CLEAN Framework",
     "Flutter",
     "Mobile Development",
     "Mobile App",

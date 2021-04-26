@@ -91,11 +91,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <body id="app" is="body-bind" class="loading fullbleed ">
   <paper-header-panel id="main" mode="standard" main>
     
-    <div id="mainToolbar" class="paper-header">
+    <div id="mainToolbar" style="background-color:#FFF;">
       <div class="site-width layout horizontal">
-        <a href="/">
-          <img src="/images/logo.png" class="logo-devs" alt="Codelabs Logo">
-        </a>
         <div id="searchbar">
           <paper-input-container no-label-float>
             <paper-icon-button prefix icon="search"></paper-icon-button>
@@ -111,16 +108,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <header id="banner" down$="[[_toBoolean(selectedFilter)]]">
       <div class="site-width">
         
-        <h2 class="banner-title">Welcome to Codelabs!</h2>
+        <h2 class="banner-title">Welcome to the CLEAN Framework Code Lab</h2>
         <div class="banner-description"
              data-filter-selected$="[[_toBoolean(selectedFilter)]]">
           <p class="banner-info">
-            Codelabs provide a guided, tutorial, hands-on
-            coding experience. Most codelabs will step you through the process
-            of building a small application, or adding a new feature to an
-            existing application.
+            Review the codelabs below to learn more.
             <br>
-            <a href="https://github.com/googlecodelabs/tools">Codelab tools on GitHub</a>
           </p>
           </div>
       </div>
@@ -137,7 +130,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </div>
 
         
-        <paper-dropdown-menu
+        <!-- <paper-dropdown-menu
           label="Choose an event"
           class="dropdown-filter"
           no-label-float
@@ -152,24 +145,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 </a>
               
           </paper-listbox>
-        </paper-dropdown-menu>
+        </paper-dropdown-menu> -->
         </div>
 
       <card-sorter id="cards" class="site-width">
         
           
             
-            <a href="/codelabs/clean_architecture_screen_presenter_bloc/index.html?index=..%2F..index" on-tap="navigate"
+            <a href="/codelabs/clean_framework_screen_presenter_bloc/index.html?index=..%2F..index" on-tap="navigate"
                class="codelab-card category-flutter"
                data-category="Flutter,Mobile Development,Mobile App"
-               data-title="CLEAN Architecture - Screen - Presenter - Bloc"
-               data-duration="20"
+               data-title="Screen - Presenter - Bloc"
+               data-duration="35"
                data-updated="2020-04-21T00:00:00-05:00"
-               data-tags="CLEAN,CLEAN Architecture,Flutter,Mobile Development,Mobile App,Mobile Architecture,Screen,Presenter,Bloc"
+               data-tags="CLEAN,CLEAN Framework,Flutter,Mobile Development,Mobile App,Mobile Architecture,Screen,Presenter,Bloc"
                data-pin="">
-              <div class="description">CLEAN Architecture - Screen - Presenter - Bloc</div>
+              <div class="description">Screen - Presenter - Bloc</div>
               <div class="card-duration">
-                <span>20 min </span>
+                <span>35 min </span>
                 <span>Updated Apr 21, 2020</span>
               </div>
               <div class="card-footer">
@@ -180,15 +173,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           
           
             
-            <a href="/codelabs/clean-architecture/index.html?index=..%2F..index" on-tap="navigate"
+            <a href="/codelabs/clean_framework/index.html?index=..%2F..index" on-tap="navigate"
                class="codelab-card category-flutter"
                data-category="Flutter,Mobile Development,Mobile App"
-               data-title="CLEAN Architecture"
+               data-title="CLEAN Framework"
                data-duration="45"
                data-updated="2020-10-08T00:00:00-05:00"
-               data-tags="CLEAN,CLEAN Architecture,Flutter,Mobile Development,Mobile App,Mobile Architecture,Screen,Presenter,Bloc"
+               data-tags="CLEAN,CLEAN Framework,Flutter,Mobile Development,Mobile App,Mobile Architecture,Screen,Presenter,Bloc"
                data-pin="">
-              <div class="description">CLEAN Architecture</div>
+              <div class="description">CLEAN Framework</div>
               <div class="card-duration">
                 <span>45 min </span>
                 <span>Updated Oct 8, 2020</span>
@@ -202,12 +195,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </card-sorter>
 
       <div id="loading-placeholder" class="site-width">
-        Loading Codelabs, please wait...
+        Loading CLEAN Framework Codelabs, please wait...
       </div>
     </main>
 
     <footer id="footer">
-      <div class="footer-wrapper site-width">
+      <!-- <div class="footer-wrapper site-width">
         <div class="link-list">
           <label>Connect</label>
           <ul>
@@ -232,17 +225,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <li><a href="https://www.example.com/">Example</a></li>
           </ul>
         </div>
-      </div>
+      </div> -->
     </footer>
 
     <div class="footerbar">
-      <div class="site-width layout horizontal center justified">
+      <!-- <div class="site-width layout horizontal center justified">
         <span>
           <a href="https://example.com">Terms</a>
           &nbsp; | &nbsp;
           <a href="https://example.com">Privacy</a>
         </span>
-      </div>
+      </div> -->
     </div>
 
   </paper-header-panel>

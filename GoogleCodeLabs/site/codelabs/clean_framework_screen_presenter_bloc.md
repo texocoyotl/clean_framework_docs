@@ -1,5 +1,5 @@
-summary: CLEAN Architecture - Screen - Presenter - Bloc
-id: clean_architecture_screen_presenter_bloc
+summary: Screen - Presenter - Bloc
+id: clean_framework_screen_presenter_bloc
 categories: Mobile Development, Flutter, Mobile App
 tags:  Flutter, Mobile Development, Mobile App
 status:  Active
