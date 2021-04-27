@@ -96,11 +96,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <body id="app" is="body-bind" class="loading fullbleed {% if view.id != 'default' -%}view{%- endif -%}">
   <paper-header-panel id="main" mode="standard" main>
     {% raw %}
-    <div id="mainToolbar" class="paper-header">
+    <div id="mainToolbar" style="background-color:#FFF;">
       <div class="site-width layout horizontal">
-        <a href="/">
-          <img src="/images/logo.png" class="logo-devs" alt="Codelabs Logo">
-        </a>
         <div id="searchbar">
           <paper-input-container no-label-float>
             <paper-icon-button prefix icon="search"></paper-icon-button>
@@ -116,16 +113,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <header id="banner" {% if view.id != 'default' -%}down{%- else %}down$="[[_toBoolean(selectedFilter)]]"{%- endif %}>
       <div class="site-width">
         {% if view.id == 'default' %}
-        <h2 class="banner-title">Welcome to Codelabs!</h2>
+        <h2 class="banner-title">Welcome to the Clean Framework Code Lab</h2>
         <div class="banner-description"
              data-filter-selected$="{% raw %}[[_toBoolean(selectedFilter)]]{% endraw %}">
           <p class="banner-info">
-            Codelabs provide a guided, tutorial, hands-on
-            coding experience. Most codelabs will step you through the process
-            of building a small application, or adding a new feature to an
-            existing application.
+            Review the codelabs below to learn more.
             <br>
-            <a href="https://github.com/googlecodelabs/tools">Codelab tools on GitHub</a>
+            <a href="https://github.com/MattHamburger/business_banking">Business Banking App</a>
           </p>
         {%- else -%}
           <div class="banner-description">
@@ -152,7 +146,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </div>
 
         {% if view.id == 'default' %}
-        <paper-dropdown-menu
+        <!-- <paper-dropdown-menu
           label="Choose an event"
           class="dropdown-filter"
           no-label-float
@@ -171,7 +165,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               {%- endif -%}
             {%- endfor %}
           </paper-listbox>
-        </paper-dropdown-menu>
+        </paper-dropdown-menu> -->
         {% endif %}
 
         {%- if showcats -%}
@@ -231,12 +225,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </card-sorter>
 
       <div id="loading-placeholder" class="site-width">
-        Loading Codelabs, please wait...
+        Loading CLEAN Framework Codelabs, please wait...
       </div>
     </main>
 
     <footer id="footer">
-      <div class="footer-wrapper site-width">
+      <!-- <div class="footer-wrapper site-width">
         <div class="link-list">
           <label>Connect</label>
           <ul>
@@ -261,17 +255,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <li><a href="https://www.example.com/">Example</a></li>
           </ul>
         </div>
-      </div>
+      </div> -->
     </footer>
 
     <div class="footerbar">
-      <div class="site-width layout horizontal center justified">
+      <!-- <div class="site-width layout horizontal center justified">
         <span>
           <a href="https://example.com">Terms</a>
           &nbsp; | &nbsp;
           <a href="https://example.com">Privacy</a>
         </span>
-      </div>
+      </div> -->
     </div>
 
   </paper-header-panel>

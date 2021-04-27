@@ -1,0 +1,30 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "updated": "2020-04-26T00:00:00-00:00",
+  "id": "clean_bloc_and_use_case",
+  "duration": 5,
+  "title": "Clean - The Bloc and Use Case",
+  "authors": "Eric Narvaez",
+  "summary": "Clean - The Bloc and Use Case",
+  "source": "clean_bloc_and_use_case.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "Flutter",
+    "Mobile Development",
+    "Mobile App"
+  ],
+  "tags": [
+    "Clean",
+    "Bloc",
+    "Use Case",
+    "Mobile Development",
+    "Mobile App"
+  ],
+  "feedback": "",
+  "url": ""
+}

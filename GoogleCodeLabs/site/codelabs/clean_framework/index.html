@@ -31,19 +31,19 @@
 </head>
 <body>
   <google-codelab codelab-gaid=""
-                  id="clean-architecture"
-                  title="CLEAN Architecture"
+                  id="clean_framework.md"
+                  title="Clean Framework"
                   environment="web">
     
-      <!--  What is the CLEAN Architecture? -->
-      <google-codelab-step label="What is the CLEAN Architecture?" duration="1">
-        <li>The CLEAN Architecture was created by Robert C. Martin (“Uncle Bob”) to make code more maintainable and easier to manage if modifying for different services.</li>
+      <!--  What is the Clean Framework? -->
+      <google-codelab-step label="What is the Clean Framework?" duration="1">
+        <li>The CLEAN Framework was created by Robert C. Martin (“Uncle Bob”) to make code more maintainable and easier to manage if modifying for different services.</li>
         <li>Separation of UI, Entity, Models, and Services</li>
         <p><img alt="alt-text-here" src="img/clean_architecture_uncle_bob_version.jpg" height="260px" width="400px" class="center"></p>     
       </google-codelab-step>
 
-      <!--  Clean Architecture Goals -->
-        <google-codelab-step label="Clean Architecture Goals" duration="3">
+      <!--  Clean Framework Goals -->
+        <google-codelab-step label="Clean Framework Goals" duration="3">
         <img alt="alt-text-here" src="img/clean_architecture_main_diagram.png" width="360px" height="270px" class="center">
 
         <h3 class="checklist" is-upgraded>- Isolation of Responsibilities</h3>
@@ -73,7 +73,7 @@
     <!--  Built on SOLID Principles -->
       <google-codelab-step label="Built on SOLID Principles" duration="2">
         <img alt="alt-text-here" src="img/solid_principles.png" width="320px" height="230px" class="center">
-        <p>The CLEAN Architecture is built upon the "SOLID" principles which are: </p>
+        <p>The Clean Framework is built upon the "SOLID" principles which are: </p>
         <ul>
           <li><h3><u>S</u>: Single Responsibility</h3></li>
             <ul>- Classes/Entities should have one purpose, not be God classes</ul>
@@ -90,8 +90,8 @@
         </ul>
       </google-codelab-step>
 
-      <!--  CLEAN Architecture Directory Structure -->
-      <google-codelab-step label="CLEAN Architecture Directory Structure" duration="2">
+      <!--  Clean Framework Directory Structure -->
+      <google-codelab-step label="Clean Framework Directory Structure" duration="2">
 
         <img alt="alt-text-here" src="img/clean_architecture_main_diagram.png" width="280px" height="260px" class="center" style="float:right;">     
                   <ul>Directory Structure:</ul>
@@ -183,31 +183,31 @@
           
       </google-codelab-step>
 
-       <!--  CLEAN Architecture Flow Chart in Flutter -->
-       <google-codelab-step label="CLEAN Architecture Flow Chart in Flutter" duration="3">
+       <!--  Clean Framework Flow Chart in Flutter -->
+       <google-codelab-step label="Clean Framework Flow Chart in Flutter" duration="3">
         <p class="image-container"><img alt="alt-text-here" src="img/flow_chart_2.png" width="800px" height="500px"></p>
         <p class="image-container"><img alt="alt-text-here" src="img/flow_chart_1.png" width="400px" height="300px"></p>
       </google-codelab-step>
 
-      <!--  CLEAN Architecture - Single Entity Structure -->
-      <google-codelab-step label="CLEAN Architecture - Single Entity Structure" duration="3">
+      <!--  Clean Framework - Single Entity Structure -->
+      <google-codelab-step label="Clean Framework - Single Entity Structure" duration="3">
         <p class="image-container"><img alt="alt-text-here" src="img/single_entity_structure.png" width="700px" height="270px"></p>
       </google-codelab-step>
 
-      <!--  CLEAN Architecture - Entity List Structure -->
-      <google-codelab-step label="CLEAN Architecture - Entity List Structure" duration="3">
+      <!--  Clean Framework - Entity List Structure -->
+      <google-codelab-step label="Clean Framework - Entity List Structure" duration="3">
         <p class="image-container"><img alt="alt-text-here" src="img/entity_list_structure.png" width="700px" height="270px"></p>
       </google-codelab-step>
 
       <!--  Cash Accounts Example -->
-      <google-codelab-step label="CLEAN Architecture Cash Accounts Example" duration="3">
+      <google-codelab-step label="Clean Framework Cash Accounts Example" duration="3">
         <li><b>Use Case</b>: Retreive Cash Accounts</li>
         <ul><li>Implementation Type: Entity List Structure</li></ul>
         <p class="image-container"><img alt="alt-text-here" src="img/entity_list_structure.png"></p>
       </google-codelab-step>
 
-        <!--  CLEAN Architecture - Repository -->
-        <google-codelab-step label="CLEAN Architecture - Repository" duration="3">
+        <!--  Clean Framework - Repository -->
+        <google-codelab-step label="Clean Framework - Repository" duration="3">
         <li>Abstraction of Data/Dependency Layer</li>
           <ul>
             <li>Creates usage of abstraction instead of concretes</li>
@@ -261,13 +261,13 @@
         runServiceAdapter(RepositoryScope scope, ServiceAdapter adapter)</pre>
       </google-codelab-step>
 
-      <!--  CLEAN Architecture - Repository Class -->
-      <google-codelab-step label="CLEAN Architecture - Repository Class" duration="3">
+      <!--  Clean Framework - Repository Class -->
+      <google-codelab-step label="Clean Framework - Repository Class" duration="3">
         <p class="image-container"><img alt="alt-text-here" src="img/repository_class.png" width="750px" height="900px"></p>
       </google-codelab-step>
 
-        <!--  CLEAN Architecture - Use Case -->
-    <google-codelab-step label="CLEAN Architecture - Use Case" duration="3">
+        <!--  Clean Framework - Use Case -->
+    <google-codelab-step label="Clean Framework - Use Case" duration="3">
       <li>Contains the primary logic for the functionality of the feature being implemented</li>
       <li>Contains implementation of all the methods that should be executed in response to events</li>
       <li>Contains View Model Callback which communicates with View Model Pipe in the BLoc</li>
@@ -309,7 +309,7 @@
           <h3><a href="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html">Uncle Bob - Clean Coder</a></h3>
           <h3><a href="https://www.geeksforgeeks.org/solid-principle-in-programming-understand-with-real-life-examples/">geeksforgeeks  - SOLID Principles</a></h3>
         </google-codelab-step>
-
+  </google-codelab>
   <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
   <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
   <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>

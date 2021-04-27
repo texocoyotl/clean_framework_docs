@@ -1,0 +1,32 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "updated": "2020-04-26T00:00:00-00:00",
+  "id": "clean_service_calls",
+  "duration": 5,
+  "title": "Clean - Creating a Service Call",
+  "authors": "Eric Narvaez",
+  "summary": "Clean - Creating a Service Call",
+  "source": "clean_service_calls.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "Flutter",
+    "Mobile Development",
+    "Mobile App"
+  ],
+  "tags": [
+    "Mockoon",
+    "Service",
+    "API Service",
+    "REST",
+    "REST Service",
+    "Mobile Development",
+    "Mobile App"
+  ],
+  "feedback": "",
+  "url": ""
+}

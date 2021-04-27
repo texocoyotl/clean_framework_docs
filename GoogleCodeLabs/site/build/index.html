@@ -12,11 +12,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="description" content="Codelabs provide a guided, tutorial, hands-on coding/learning experience.">
+  <meta name="description" content="Codelabs provide a guided, tutorial, hands-on coding experience. Most codelabs will step you through the process of building a small application, or adding a new feature to an existing application.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="generator" content="Huntington Codelabs">
-  <meta name="application-name" content="Huntington Codelabs">
-  <!-- <link rel="canonical" href="https://example.com/" /> -->
+  <meta name="generator" content="Codelabs">
+  <meta name="application-name" content="Codelabs">
+  <link rel="canonical" href="https://example.com/" />
   <link rel="preconnect" href="https://www.google-analytics.com" />
 
   <script>
@@ -27,7 +27,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </script>
   <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-  <title>Huntington Codelabs</title>
+  <title>Codelabs</title>
 
   <link rel="stylesheet" href="/styles/main.css">
 
@@ -81,21 +81,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <meta name="og:image:height" property="og:image:height" content="1200" />
   <meta name="og:image:alt" property="og:image:alt" content="Codelabs" />
 
-  <!-- <meta name="twitter:card" property="twitter:card" content="summary_large_image" />
+  <meta name="twitter:card" property="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" property="twitter:title" content="Codelabs" />
   <meta name="twitter:description" property="twitter:description" content="Codelabs provide a guided, tutorial, hands-on coding experience. Most codelabs will step you through the process of building a small application, or adding a new feature to an existing application." />
   <meta name="twitter:image" property="twitter:image" content="/images/og-image.png" />
-  <meta name="twitter:url" property="twitter:url" content="https://example.com/" /> -->
+  <meta name="twitter:url" property="twitter:url" content="https://example.com/" />
 </head>
 
 <body id="app" is="body-bind" class="loading fullbleed ">
   <paper-header-panel id="main" mode="standard" main>
     
-    <div id="mainToolbar" class="paper-header">
+    <div id="mainToolbar" style="background-color:#FFF;">
       <div class="site-width layout horizontal">
-        <a href="/">
-          <img src="https://www.huntington.com/-/media/hcom/global/logo/lockup.svg" class="logo-devs" alt="Huntington Bank Logo">
-        </a>
         <div id="searchbar">
           <paper-input-container no-label-float>
             <paper-icon-button prefix icon="search"></paper-icon-button>
@@ -111,11 +108,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <header id="banner" down$="[[_toBoolean(selectedFilter)]]">
       <div class="site-width">
         
-        <h2 class="banner-title">Welcome to Huntington Codelabs!</h2>
+        <h2 class="banner-title">Welcome to the Clean Framework Code Lab</h2>
         <div class="banner-description"
              data-filter-selected$="[[_toBoolean(selectedFilter)]]">
           <p class="banner-info">
-            Codelabs provide a guided, tutorial, hands-on coding/learning experience. 
+            Review the codelabs below to learn more.
+            <br>
+            <a href="https://github.com/MattHamburger/business_banking">Business Banking App</a>
           </p>
           </div>
       </div>
@@ -131,7 +130,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           </paper-tabs>
         </div>
 
-        <paper-dropdown-menu
+        
+        <!-- <paper-dropdown-menu
           label="Choose an event"
           class="dropdown-filter"
           no-label-float
@@ -141,26 +141,214 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             id="eventList"
             slot="dropdown-content"
             class="dropdown-content"
-          >
-          <!-- <a href="/vslive/" tabindex="-1">
+          ><a href="/vslive/" tabindex="-1">
                   <paper-item>Visual Studio Live</paper-item>
-                </a> -->
+                </a>
               
           </paper-listbox>
-        </paper-dropdown-menu>
+        </paper-dropdown-menu> -->
         </div>
 
       <card-sorter id="cards" class="site-width">
         
+          
+            
+            <a href="/codelabs/clean_bloc_and_repository/index.html?index=..%2F..index" on-tap="navigate"
+               class="codelab-card category-flutter"
+               data-category="Flutter,Mobile Development,Mobile App"
+               data-title="Clean - The Bloc and Repository"
+               data-duration="5"
+               data-updated="2020-04-26T00:00:00-00:00"
+               data-tags="Clean,Bloc,Repository,Repo,Mobile Development,Mobile App"
+               data-pin="">
+              <div class="description">Clean - The Bloc and Repository</div>
+              <div class="card-duration">
+                <span>5 min </span>
+                <span>Updated Apr 26, 2020</span>
+              </div>
+              <div class="card-footer">
+                <div class="category-icon flutter-icon"></div>
+                <paper-button class="flutter-bg">Start</paper-button>
+              </div>
+            </a>
+          
+          
+            
+            <a href="/codelabs/clean_bloc_and_use_case/index.html?index=..%2F..index" on-tap="navigate"
+               class="codelab-card category-flutter"
+               data-category="Flutter,Mobile Development,Mobile App"
+               data-title="Clean - The Bloc and Use Case"
+               data-duration="5"
+               data-updated="2020-04-26T00:00:00-00:00"
+               data-tags="Clean,Bloc,Use Case,Mobile Development,Mobile App"
+               data-pin="">
+              <div class="description">Clean - The Bloc and Use Case</div>
+              <div class="card-duration">
+                <span>5 min </span>
+                <span>Updated Apr 26, 2020</span>
+              </div>
+              <div class="card-footer">
+                <div class="category-icon flutter-icon"></div>
+                <paper-button class="flutter-bg">Start</paper-button>
+              </div>
+            </a>
+          
+          
+            
+            <a href="/codelabs/clean_framework_screen_presenter_bloc/index.html?index=..%2F..index" on-tap="navigate"
+               class="codelab-card category-flutter"
+               data-category="Flutter,Mobile Development,Mobile App"
+               data-title="Screen, Presenter, and Bloc"
+               data-duration="35"
+               data-updated="2020-04-21T00:00:00-05:00"
+               data-tags="Clean,Clean Framework,Flutter,Mobile Development,Mobile App,Mobile Architecture,Screen,Presenter,Bloc"
+               data-pin="">
+              <div class="description">Screen, Presenter, and Bloc</div>
+              <div class="card-duration">
+                <span>35 min </span>
+                <span>Updated Apr 21, 2020</span>
+              </div>
+              <div class="card-footer">
+                <div class="category-icon flutter-icon"></div>
+                <paper-button class="flutter-bg">Start</paper-button>
+              </div>
+            </a>
+          
+          
+            
+            <a href="/codelabs/clean_framework/index.html?index=..%2F..index" on-tap="navigate"
+               class="codelab-card category-flutter"
+               data-category="Flutter,Mobile Development,Mobile App"
+               data-title="Clean Framework"
+               data-duration="45"
+               data-updated="2020-10-08T00:00:00-05:00"
+               data-tags="Clean,Clean Framework,Flutter,Mobile Development,Mobile App,Mobile Architecture,Screen,Presenter,Bloc"
+               data-pin="">
+              <div class="description">Clean Framework</div>
+              <div class="card-duration">
+                <span>45 min </span>
+                <span>Updated Oct 8, 2020</span>
+              </div>
+              <div class="card-footer">
+                <div class="category-icon flutter-icon"></div>
+                <paper-button class="flutter-bg">Start</paper-button>
+              </div>
+            </a>
+          
+          
+            
+            <a href="/codelabs/clean_presenter_bloc/index.html?index=..%2F..index" on-tap="navigate"
+               class="codelab-card category-flutter"
+               data-category="Flutter,Mobile Development,Mobile App"
+               data-title="Presenter and Bloc"
+               data-duration="5"
+               data-updated="2020-04-21T00:00:00-05:00"
+               data-tags="Clean,Clean Framework,Flutter,Mobile Development,Mobile App,Mobile Architecture,Presenter,Bloc"
+               data-pin="">
+              <div class="description">Presenter and Bloc</div>
+              <div class="card-duration">
+                <span>5 min </span>
+                <span>Updated Apr 21, 2020</span>
+              </div>
+              <div class="card-footer">
+                <div class="category-icon flutter-icon"></div>
+                <paper-button class="flutter-bg">Start</paper-button>
+              </div>
+            </a>
+          
+          
+            
+            <a href="/codelabs/clean_repository/index.html?index=..%2F..index" on-tap="navigate"
+               class="codelab-card category-flutter"
+               data-category="Flutter,Mobile Development,Mobile App"
+               data-title="Clean - The Repository"
+               data-duration="5"
+               data-updated="2020-04-26T00:00:00-00:00"
+               data-tags="Clean,Repository,Mobile Development,Mobile App"
+               data-pin="">
+              <div class="description">Clean - The Repository</div>
+              <div class="card-duration">
+                <span>5 min </span>
+                <span>Updated Apr 26, 2020</span>
+              </div>
+              <div class="card-footer">
+                <div class="category-icon flutter-icon"></div>
+                <paper-button class="flutter-bg">Start</paper-button>
+              </div>
+            </a>
+          
+          
+            
+            <a href="/codelabs/clean_screen_presenter/index.html?index=..%2F..index" on-tap="navigate"
+               class="codelab-card category-flutter"
+               data-category="Flutter,Mobile Development,Mobile App"
+               data-title="Clean - The Screen and Presenter"
+               data-duration="5"
+               data-updated="2020-04-26T00:00:00-00:00"
+               data-tags="Clean,Screen,Presenter,Mobile Development,Mobile App"
+               data-pin="">
+              <div class="description">Clean - The Screen and Presenter</div>
+              <div class="card-duration">
+                <span>5 min </span>
+                <span>Updated Apr 26, 2020</span>
+              </div>
+              <div class="card-footer">
+                <div class="category-icon flutter-icon"></div>
+                <paper-button class="flutter-bg">Start</paper-button>
+              </div>
+            </a>
+          
+          
+            
+            <a href="/codelabs/clean_service_calls/index.html?index=..%2F..index" on-tap="navigate"
+               class="codelab-card category-flutter"
+               data-category="Flutter,Mobile Development,Mobile App"
+               data-title="Clean - Creating a Service Call"
+               data-duration="5"
+               data-updated="2020-04-26T00:00:00-00:00"
+               data-tags="Mockoon,Service,API Service,REST,REST Service,Mobile Development,Mobile App"
+               data-pin="">
+              <div class="description">Clean - Creating a Service Call</div>
+              <div class="card-duration">
+                <span>5 min </span>
+                <span>Updated Apr 26, 2020</span>
+              </div>
+              <div class="card-footer">
+                <div class="category-icon flutter-icon"></div>
+                <paper-button class="flutter-bg">Start</paper-button>
+              </div>
+            </a>
+          
+          
+            
+            <a href="/codelabs/mockoon_create_a_service/index.html?index=..%2F..index" on-tap="navigate"
+               class="codelab-card category-flutter"
+               data-category="Flutter,Mobile Development,Mobile App"
+               data-title="Mockoon - Create a Service"
+               data-duration="5"
+               data-updated="2020-04-26T00:00:00-00:00"
+               data-tags="Mockoon,Service,API,API Service,REST,REST Service,Mobile Development,Mobile App"
+               data-pin="">
+              <div class="description">Mockoon - Create a Service</div>
+              <div class="card-duration">
+                <span>5 min </span>
+                <span>Updated Apr 26, 2020</span>
+              </div>
+              <div class="card-footer">
+                <div class="category-icon flutter-icon"></div>
+                <paper-button class="flutter-bg">Start</paper-button>
+              </div>
+            </a>
+          
       </card-sorter>
 
       <div id="loading-placeholder" class="site-width">
-        Loading Codelabs, please wait...
+        Loading CLEAN Framework Codelabs, please wait...
       </div>
     </main>
 
-    <!-- <footer id="footer">
-      <div class="footer-wrapper site-width">
+    <footer id="footer">
+      <!-- <div class="footer-wrapper site-width">
         <div class="link-list">
           <label>Connect</label>
           <ul>
@@ -185,18 +373,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <li><a href="https://www.example.com/">Example</a></li>
           </ul>
         </div>
-      </div>
+      </div> -->
     </footer>
 
     <div class="footerbar">
-      <div class="site-width layout horizontal center justified">
+      <!-- <div class="site-width layout horizontal center justified">
         <span>
           <a href="https://example.com">Terms</a>
           &nbsp; | &nbsp;
           <a href="https://example.com">Privacy</a>
         </span>
-      </div>
-    </div>-->
+      </div> -->
+    </div>
 
   </paper-header-panel>
 

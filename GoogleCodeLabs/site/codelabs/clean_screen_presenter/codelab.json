@@ -1,0 +1,30 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "updated": "2020-04-26T00:00:00-00:00",
+  "id": "clean_screen_presenter",
+  "duration": 5,
+  "title": "Clean - The Screen and Presenter",
+  "authors": "Eric Narvaez",
+  "summary": "Clean - The Screen and Presenter",
+  "source": "clean_screen_presenter.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "Flutter",
+    "Mobile Development",
+    "Mobile App"
+  ],
+  "tags": [
+    "Clean",
+    "Screen",
+    "Presenter",
+    "Mobile Development",
+    "Mobile App"
+  ],
+  "feedback": "",
+  "url": ""
+}

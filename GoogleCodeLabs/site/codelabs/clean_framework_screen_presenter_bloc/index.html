@@ -1,0 +1,166 @@
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>The Screen, Presenter, and Bloc</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+    .center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 50%;
+    }
+    .FlowChartColored{
+      width: 100px;
+      height: 100px;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab codelab-gaid=""
+                  id="clean_framework_screen_presenter_bloc"
+                  title="Clean Framework - Screen, Presenter, and Bloc"
+                  environment="web">
+
+      <!--  Clean Architecture - Screen - Bloc - Presenter -->
+      <google-codelab-step label="The Screen, Presenter, and Bloc" duration="5">
+        <img alt="alt-text-here" src="img/screen-bloc-presenter.png" height="300px" class="center">
+
+        <h2 style="color:black;font-size:28px;">Bloc</h2>
+        <li>The Bloc contains the Use Case(s) that have the specific business logic/processes</li>
+        <li>A <code>Bloc</code> can contain one or many <code>Use Cases</code></li>
+
+        <h2 style="color:black;font-size:28px;">Presenter</h2>
+        <li>The presenter creates the <code>Screen</code> and manages the Navigation of the <code>Screen</code> actions</li>
+
+        <h2 style="color:black;font-size:28px;">Screen</h2>
+        <li>The <code>Screen</code> matches the view model to the the UI elements</li>
+      </google-codelab-step>
+
+
+      <!--  Clean Architecture - Bloc -->
+      <google-codelab-step label="The Bloc" duration="5">
+        <img alt="alt-text-here" src="img/bloc_components.png" class="center">
+        <h2>General Bloc Structure</h2>
+        <li>Class Imports</li>
+        <li>Class Extends <code>Bloc</code></li>
+        <li>Declarations</li>
+        <ul><li>Variable(s)</li></ul>
+        <ul><li>Event Pipe(s)</li></ul>
+        <ul><li>Pipe(s)</li></ul>
+        <ul><li>Use Case(s)</li></ul>
+        <li>Class Constructure with Input Parameters</li>
+        <li>Event Pipe, Pipe, and <code>Use Case</code> Listers are Setup</li>
+          <ul><li>The <code>Bloc</code> class should not be a container for all <code>Use Case</code> actions all mixed together!</li></ul>
+        <li>Dispose function for Proper Cleanup</li>
+
+        <h2>Use Case(s)</h2>
+        <li>Use Case(s) should contain the specific actions and logical operations pertinent to the <code>Use Case</code></li>
+  
+
+      </google-codelab-step>
+
+      <!--  Clean Architecture - Presenter -->
+      <google-codelab-step label="The Presenter" duration="5">
+          <img alt="alt-text-here" src="img/presenter_components.png" class="center">
+          <h2>General Presenter Structure</h2>
+          <li>Class Imports</li>
+          <li>Class Extends Presenter<code><[Bloc],[ViewModel],[Screen]></code></li>
+          <li>Variable Declarations</li>
+          <li>Class Constructor</li>
+          <li>Overrides</li>
+          <ul><li><code>buildScreen</code></li></ul>
+          <ol><ul><li>This is where the <code>Screen</code> is created</li></ul></ol>
+          <ul><li><code>buildLoadingScreen</code></li></ul>
+          <ol><ul><li>This is where the Loading Screen is created</li></ul></ol>
+          <ul><li><code>getViewModelStream</code></li></ul>
+          <ol><ul><li>This is where the primary View Model changes are picked up at from the <code>Bloc</code> listener</li></ul></ol>
+          <li>Functions that handle navigation for the Screen being created</li>
+
+          <h2>Recommendations</h2>
+          <li>Create 1 Pipe for the View Model to be passed to the <code>Screen</code></li>
+          <li>Create 1 <code>Use Case</code> Pipe that handles all Use Case actions through that one pipe to the Bloc from the Screen (back and forth)</li>
+  
+      </google-codelab-step>
+
+      <!--  Clean Architecture - Screen -->
+      <google-codelab-step label="The Screen" duration="5">
+        <img alt="alt-text-here" src="img/screen_components.png" class="center">
+
+        <h2>Screen Creation</h2>
+        <li>The screen is created in the Presenter's <code>buildScreen</code> override function</li>
+
+        <h2>General Screen Structure</h2>
+        <li>Class Imports</li>
+        <li>Class Extends <code>Screen</code></li>
+        <li>Variable Declarations</li>
+        <li>Presenter Function Declarations</li>
+        <li>Class Constructor with Parameters from the <code>Presenter</code>, such as:</li>
+            <ul><li>View Model(s)</li></ul>
+            <ul><li>Presenter Function(s)</li></ul>
+            <ul><li>Any other Parameter you would like to pass</li></ul>
+        <li>Widget <code>build</code> function override</li>
+      </google-codelab-step>
+
+      <!--  Clean Architecture - Sending Event/Data from Screen to Bloc -->
+      <google-codelab-step label="Sending Event/Data from Screen to Bloc" duration="5">
+        <img alt="alt-text-here" src="img/event_downstream.png" class="center">
+
+        <h2>The Path of Action</h2>
+        <ol type="1">
+          <li>Get the action event from the <code>Screen</code>, via a callback function such as <code>onTap</code></li>
+          <li>Utilize the <code>Presenter</code> function provided via the <code>Screen</code>constructor, to send data/action to the <code>Presenter</code> class</li>
+          <li>You should have access to the <code>Bloc</code> via the <code>Presenter</code> class</li>
+          <ul><li><b>You should not access the <code>Bloc</code> via the <code>Screen</code> class</b></li></ul>
+          <li>Utilize a <code>Use Case</code> event pipe to send the pertinent action/data through the event pipe to the <code>Use Case</code> listener in the <code>Bloc</code> class</li>
+          <li>Finally, perform the specific <code>Use Case</code> action/logic via the listener in the <code>Bloc</code> class</li>
+            <ul><li>If a <code>Use Case</code> is being utilized, execute the action within the <code>Use Case</code> class, not within the <code>Bloc</code> class</li></ul>
+            <ul><li>The <code>Use Case</code> can have its own public models, variables, etc. that are accessible via the <code>Use Case</code> instance within the <code>Bloc</code></li></ul>
+        </ol>
+      </google-codelab-step>
+
+      <!--  Clean Architecture - Sending Event/Data from Use Case to Screen -->
+      <google-codelab-step label="Sending Event/Data from Use Case to Screen" duration="5">
+
+        <img alt="alt-text-here" src="img/event_upstream.png" class="center">
+        <h2>The Path of Action</h2>
+        <ol type="1">
+          <li>Complete the specific action/logic within the <code>Use Case</code> class (this should also be an instance referenced from the <code>Bloc</code>class)</li>
+          <li>Assuming some sort of callback is in order, update the specific model, variable, object, etc. in the <code>Use Case</code> class</li>
+          <li>Retrieve the new value in the <code>Presenter</code> class by referencing the <code>Bloc</code> instance, which will have access to the <code>Use Case</code> instance, 
+            and you can now get the new updated <code>Use Case</code> model, variable, etc.</li>
+          <li>If the <code>Screen</code> that was created needs to utilize the callback in some form, use the <code>Presenter</code> to then send the callback to the <code>Screen</code></li>
+        </ol>
+      </google-codelab-step>
+
+      <!--  Clean Architecture - Screen Action Navigation -->
+      <google-codelab-step label="Screen Action Navigation" duration="5">
+        <img alt="alt-text-here" src="img/some_interesting_widget.png" class="center">
+
+        <h2>The Path of Action</h2>
+        <ol type="1">
+          <li>Get the action event from the <code>Screen</code>, via a callback function such as <code>onTap</code></li>
+          <li>Utilize a <code>Presenter</code> function provided via the <code>Screen</code>constructor to send an input event/data to the <code>Presenter</code> class</li>
+          <li>Within the <code>Presenter</code> class' function, execute the proper navigation via a <code>MaterialPageRoute</code> builder within a <code>Navigator.push</code> event</li>
+        </ol>
+      </google-codelab-step>
+
+  </google-codelab>
+          <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+          <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+          <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+          <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+          <script src="//support.google.com/inapp/api.js"></script>
+</body>
+</html>
