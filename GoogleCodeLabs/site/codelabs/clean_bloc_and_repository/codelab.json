@@ -1,0 +1,31 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "updated": "2020-04-26T00:00:00-00:00",
+  "id": "clean_bloc_and_repository",
+  "duration": 5,
+  "title": "Clean - The Bloc and Repository",
+  "authors": "Eric Narvaez",
+  "summary": "Clean - The Bloc and Repository",
+  "source": "clean_bloc_and_repository.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "Flutter",
+    "Mobile Development",
+    "Mobile App"
+  ],
+  "tags": [
+    "Clean",
+    "Bloc",
+    "Repository",
+    "Repo",
+    "Mobile Development",
+    "Mobile App"
+  ],
+  "feedback": "",
+  "url": ""
+}
