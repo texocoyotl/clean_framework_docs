@@ -1,0 +1,33 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "updated": "2020-04-26T00:00:00-00:00",
+  "id": "mockoon_create_a_service",
+  "duration": 5,
+  "title": "Mockoon - Create a Service",
+  "authors": "Eric Narvaez",
+  "summary": "Mockoon - Create a Service",
+  "source": "mockoon_create_a_service.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "Flutter",
+    "Mobile Development",
+    "Mobile App"
+  ],
+  "tags": [
+    "Mockoon",
+    "Service",
+    "API",
+    "API Service",
+    "REST",
+    "REST Service",
+    "Mobile Development",
+    "Mobile App"
+  ],
+  "feedback": "",
+  "url": ""
+}

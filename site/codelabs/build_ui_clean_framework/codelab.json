@@ -1,0 +1,31 @@
+{
+    "environment": "web",
+    "format": "html",
+    "prefix": "https://storage.googleapis.com",
+    "updated": "2021-04-01T00:00:00-13:00",
+    "id": "build_ui_clean_framework",
+    "duration": 20,
+    "title": "Clean Framework UI",
+    "authors": "Matt Hamburger",
+    "summary": "How to create the UI with Clean Framework",
+    "source": "build_ui_clean_framework.md",
+    "theme": "",
+    "status": [
+        "published"
+    ],
+    "category": [
+        "Flutter",
+        "Mobile Development",
+        "Mobile App",
+        "Clean Framework"
+    ],
+    "tags": [
+        "Flutter",
+        "Mobile Development",
+        "Mobile App",
+        "Clean Framework",
+        "Clean Code"
+    ],
+    "feedback": "",
+    "url": ""
+}

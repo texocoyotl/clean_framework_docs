@@ -1,0 +1,320 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>How to Write a Codelab</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+    .center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 50%;
+    }
+    .FlowChartColored{
+      width: 100px;
+      height: 100px;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab codelab-gaid=""
+                  id="clean_framework.md"
+                  title="Clean Framework"
+                  environment="web">
+    
+      <!--  What is the Clean Framework? -->
+      <google-codelab-step label="What is the Clean Framework?" duration="1">
+        <li>The CLEAN Framework was created by Robert C. Martin (“Uncle Bob”) to make code more maintainable and easier to manage if modifying for different services.</li>
+        <li>Separation of UI, Entity, Models, and Services</li>
+        <p><img alt="alt-text-here" src="img/clean_architecture_uncle_bob_version.jpg" height="260px" width="400px" class="center"></p>     
+      </google-codelab-step>
+
+      <!--  Clean Framework Goals -->
+        <google-codelab-step label="Clean Framework Goals" duration="3">
+        <img alt="alt-text-here" src="img/clean_architecture_main_diagram.png" width="360px" height="270px" class="center">
+
+        <h3 class="checklist" is-upgraded>- Isolation of Responsibilities</h3>
+          <ul>
+            <li>Business Logic (BLoc)</li>
+            <li>UI</li>
+            <li>Use Cases</li>
+            <li>Service Adapters</li>
+          </ul>
+        <h3 class="checklist" is-upgraded>- Decoupled Structure</h3>
+        <ul>
+          <li>Easily swap services, databases, etc.</li>
+          <li>Classes are not dependent on each other </li>
+          <ul>
+            <li>Entities are concerned only about their own functionalities </li>
+          </ul>
+          <li>Use Cases</li>
+          <li>Service Adapters</li>
+        </ul>
+        <h3 class="checklist" is-upgraded>- Single Purpose Entities</h3>
+        <ul>
+          <li>Classes serve one purpose</li>
+        </ul>
+    
+      </google-codelab-step>
+
+    <!--  Built on SOLID Principles -->
+      <google-codelab-step label="Built on SOLID Principles" duration="2">
+        <img alt="alt-text-here" src="img/solid_principles.png" width="320px" height="230px" class="center">
+        <p>The Clean Framework is built upon the "SOLID" principles which are: </p>
+        <ul>
+          <li><h3><u>S</u>: Single Responsibility</h3></li>
+            <ul>- Classes/Entities should have one purpose, not be God classes</ul>
+          <li><h3><u>O</u>: Open/Closed Approach</h3></li>
+            <ul>-	Classes should be inheritable for functionality but not modifiable</ul>
+          <li><h3><u>L</u>: Liskov Substitution</h3></li>
+            <ul>-	Every subclass should be substitutable for their parent class</ul>
+          <li><h3><u>I</u>: Interface Segregation</h3></li>
+            <ul>-	Don’t use a generalized interface as a one-all be all interface. Instead,
+              implement specific interfaces for their specific needs.
+              </ul>
+          <li><h3><u>D</u>: Dependency Inversion</h3></li>
+            <ul>-	Entities should depend on abstractions not on each other.</ul>
+        </ul>
+      </google-codelab-step>
+
+      <!--  Clean Framework Directory Structure -->
+      <google-codelab-step label="Clean Framework Directory Structure" duration="2">
+
+        <img alt="alt-text-here" src="img/clean_architecture_main_diagram.png" width="280px" height="260px" class="center" style="float:right;">     
+                  <ul>Directory Structure:</ul>
+          <li>Feature Directory&nbsp;&nbsp;&nbsp;(Separation of layers)</li>
+          <ul>
+            <li>api&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>(Service and Service Models directory)</b></li>
+            <li>bloc&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>(Business Logic, Use Case, & Adapter 
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;directory)</b></li>
+            <li>model&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>(Entity and View Model directory)</b></li>
+            <li>ui&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>(Feature Widget, Presenter, and UI 
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;directory)</b></li>
+          </ul>
+          <br>
+          <li>Example Directory Structure ↓</li>
+          <img alt="alt-text-here" src="img/directory_flutter_app.png" width="340px" height="380px" class="center">            
+        </google-codelab-step>
+
+
+      <!--  Directory Structure Examined-->
+      <google-codelab-step label="Directory Structure Examined" duration="2">
+        <img alt="alt-text-here" src="img/directory_flutter_app.png" height="340px" class="center">           
+        <hr>
+
+        <h2>Service Models</h2>
+          <li>The Request Model is created and provided to the Service Adapter</li>
+          <li>The Response Model is created and provided to the Service Adapter</li>
+          <li>The Service Adapter maps the JSON response to the Response Model Entity</li>
+
+      
+        <h2>BLoc</h2>
+        <ul>
+          <li>Executes the use case(s) created</li>
+            <li>Utilizes the pipe(s) created (setup listeners and send data)</li>
+            <li>Properly disposes pipe with dispose method</li>
+            <li>Provides BLoc constructor</li> 
+            <li>Sets up the Use Case(s) with a pipe to send out the view model</li>
+          <ul>
+            <li>However, the View Model call back functionality resides in the Use Case</li>
+          </ul>
+      </ul>
+ 
+
+        <h2>Service Adapter</h2>
+        <li>Provides the following to the specific service</li>
+          <ul>
+            <li>Entity Model</li>
+            <li>JSON Model</li>
+            <li>Service Response Model</li>
+            <li>Service Class Being Called</li>
+          </ul>
+        <li>Provides method for mapping the response to the Entity Model</li>
+
+        <h2>Use Case</h2>
+          <li>Utilizes a Repository Scope</li>
+          <li>Provides Constructor for Specific Use Case Types</li>
+          <li>Provides linkage to parent Repository Scope</li>
+          <li>Define linkage to children Entity Scope Types</li> 
+          <li>Enables construction of View Model</li>     
+        </google-codelab-step>
+
+         <!--  Directory Structure Examined  Continued...-->
+      <google-codelab-step label="Directory Structure Examined  Continued..." duration="2">
+        <img alt="" src="img/directory_flutter_app.png" class="center" class="FlowChartColored">           
+      
+        <h2>Entity</h2>
+          <li>The object types created for the particular use case(s)</li>
+          <li>Also known as the Domain Model</li>
+        
+        <h2>View Model</h2>
+        <li>View Model will be the middle man between the UI and the Use Case</li>
+        <li>The object mapping to the UI to be displayed</li>
+        <li>A View Model List may also be provided instead of a View Model if multiple JSON objects are returned</li>
+         
+        <h2>Feature Widget</h2>
+        <li>Creates BLoc</li>
+        <li>Associates a Presenter to the BLoc</li>
+
+        <h2>Presenter</h2>
+          <li>Creates the "Screen" based off of:</li>
+          <ul>
+            <li>BuildContext</li>
+            <li>BLoc</li>
+            <li>View Model</li>
+          </ul>
+       
+        <h2>Screen</h2>
+          <li>The actual UI Widget being present for the specific Use Case</li>
+          <li>This is where the View Model (or View Model List) will map the data to the UI</li>
+          
+      </google-codelab-step>
+
+       <!--  Clean Framework Flow Chart in Flutter -->
+       <google-codelab-step label="Clean Framework Flow Chart in Flutter" duration="3">
+        <p class="image-container"><img alt="alt-text-here" src="img/flow_chart_2.png" width="800px" height="500px"></p>
+        <p class="image-container"><img alt="alt-text-here" src="img/flow_chart_1.png" width="400px" height="300px"></p>
+      </google-codelab-step>
+
+      <!--  Clean Framework - Single Entity Structure -->
+      <google-codelab-step label="Clean Framework - Single Entity Structure" duration="3">
+        <p class="image-container"><img alt="alt-text-here" src="img/single_entity_structure.png" width="700px" height="270px"></p>
+      </google-codelab-step>
+
+      <!--  Clean Framework - Entity List Structure -->
+      <google-codelab-step label="Clean Framework - Entity List Structure" duration="3">
+        <p class="image-container"><img alt="alt-text-here" src="img/entity_list_structure.png" width="700px" height="270px"></p>
+      </google-codelab-step>
+
+      <!--  Cash Accounts Example -->
+      <google-codelab-step label="Clean Framework Cash Accounts Example" duration="3">
+        <li><b>Use Case</b>: Retreive Cash Accounts</li>
+        <ul><li>Implementation Type: Entity List Structure</li></ul>
+        <p class="image-container"><img alt="alt-text-here" src="img/entity_list_structure.png"></p>
+      </google-codelab-step>
+
+        <!--  Clean Framework - Repository -->
+        <google-codelab-step label="Clean Framework - Repository" duration="3">
+        <li>Abstraction of Data/Dependency Layer</li>
+          <ul>
+            <li>Creates usage of abstraction instead of concretes</li>
+          </ul>
+        <li>Maps Scope to Entities</li>
+          <ul>
+            <li>Literally with a Map object collection</li>
+          </ul>
+        <li>Manages Scopes</li>
+        <ul>
+          <li>Associates Scopes to Entity Types</li>
+        </ul>
+        <li>Executes Service Adapter Functionality</li>
+        <ul>
+          <li>Via the Repository Scope</li>
+        </ul>
+        <li>Essentially, provides a "container" for any specific Entity to operate within the CLEAN architecture</li>
+      
+      
+        <h3>Maps Scope to Entities</h3>
+        <p>Repository contains Entities with data and Scope mapped to that Entity:</p>
+        <pre>
+        /// Creates a Map collection of Repository Scope and Entity Type.
+        Map&#60;RepositoryScope, Entity> scopes = {};</pre>
+        
+        <p>To get a Scope for current Entity use method:</p>
+        <pre>
+        /// Checks if a Scope is associated with a specific Entity Type.
+        containsScope&#60;E extends Entity>()</pre>
+
+        <p>To get an Entity for current scope use method:</p>
+        <pre>
+        /// Returns the Entity associated with the Scope in the Map collection.
+        get&#60;E extends Entity>(RepositoryScope scope)</pre>
+        
+        <h3>Manages Scopes</h3>  
+        <p>To create a new scope for an existing Entity use method:</p>
+        <pre>
+        /// Creates a Scope if One is not already set, if set return existing scope. 
+        create&#60;E extends Entity>(E entity, Function(dynamic) subscription)</pre>
+        
+        <p>To update a scope for an existing Entity use method:</p>
+        <pre>
+        /// Updates an existing Scope to a scope provided to the method.
+        update&#60;E extends Entity>(RepositoryScope scope, E entity)</pre>
+        
+        <h3>Executes Service Adapter</h3>
+        <p>To execute the Service Adapter use method:</p>
+        <pre>
+        /// Execute the provided Service Adapter with the associated Scope.
+        runServiceAdapter(RepositoryScope scope, ServiceAdapter adapter)</pre>
+      </google-codelab-step>
+
+      <!--  Clean Framework - Repository Class -->
+      <google-codelab-step label="Clean Framework - Repository Class" duration="3">
+        <p class="image-container"><img alt="alt-text-here" src="img/repository_class.png" width="750px" height="900px"></p>
+      </google-codelab-step>
+
+        <!--  Clean Framework - Use Case -->
+    <google-codelab-step label="Clean Framework - Use Case" duration="3">
+      <li>Contains the primary logic for the functionality of the feature being implemented</li>
+      <li>Contains implementation of all the methods that should be executed in response to events</li>
+      <li>Contains View Model Callback which communicates with View Model Pipe in the BLoc</li>
+
+      <br/><h3>What should be contained in a Use Case?</h3>
+      <li>A Repository associating a Scope with an Entity</li>
+      <li>If a service is needed, the Use Case associates the Service Adapter to the Repository Scope</li>
+      <li>If updating UI, building of a View Model and providing the View Model via a callback function through the Repository</li>
+    </google-codelab-step>
+
+     <!--  Cash Accounts Example - Use Case -->
+     <google-codelab-step label="Cash Accounts Example - Use Case" duration="3">
+      <p class="image-container"><img alt="alt-text-here" src="img/cash_accounts_use_case.png"></p>
+    </google-codelab-step>
+
+      <!--  Cash Accounts Example - BLoc -->
+      <google-codelab-step label="Cash Accounts Example - BLoc" duration="3">
+        <p class="image-container"><img alt="alt-text-here" src="img/cash_accounts_bloc.png"></p>
+      </google-codelab-step>
+
+      <!--  Cash Accounts Example - Service Adapter-->
+      <google-codelab-step label="Cash Accounts - Service Adapter" duration="3">
+        <p class="image-container"><img alt="alt-text-here" src="img/cash_accounts_service_adapter.png"></p>
+      </google-codelab-step>
+
+      <!--  Cash Accounts Example - Presenter -->
+      <google-codelab-step label="Cash Accounts - Presenter" duration="9">
+        <p class="image-container"><img alt="alt-text-here" src="img/cash_accounts_presenter.png"></p>
+      </google-codelab-step>
+
+      <!--  Cash Accounts Example - Screen -->
+      <google-codelab-step label="Cash Accounts - Screen -> UI" duration="3">
+        <p class="image-container"><img alt="alt-text-here" src="img/cash_accounts_screen.png"></p>
+        <p class="image-container"><img alt="alt-text-here" src="img/cash_account_rendered.png" width="400px"></p>
+      </google-codelab-step>
+
+        <google-codelab-step label="References" duration="3">
+          <h3><a href="https://android.jlelse.eu/thoughts-on-clean-architecture-b8449d9d02df">AndroidPub - Milhay Nagy</a></h3>
+          <h3><a href="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html">Uncle Bob - Clean Coder</a></h3>
+          <h3><a href="https://www.geeksforgeeks.org/solid-principle-in-programming-understand-with-real-life-examples/">geeksforgeeks  - SOLID Principles</a></h3>
+        </google-codelab-step>
+  </google-codelab>
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

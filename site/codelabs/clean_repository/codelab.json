@@ -1,0 +1,29 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "updated": "2020-04-26T00:00:00-00:00",
+  "id": "clean_repository",
+  "duration": 5,
+  "title": "Clean - The Repository",
+  "authors": "Eric Narvaez",
+  "summary": "Clean - The Repository",
+  "source": "clean_repository.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "Flutter",
+    "Mobile Development",
+    "Mobile App"
+  ],
+  "tags": [
+    "Clean",
+    "Repository",
+    "Mobile Development",
+    "Mobile App"
+  ],
+  "feedback": "",
+  "url": ""
+}
