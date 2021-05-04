@@ -1,0 +1,28 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "updated": "2020-04-26T00:00:00-00:00",
+  "id": "testing_fakes",
+  "duration": 5,
+  "title": "Testing - Fakes",
+  "authors": "Eric Narvaez",
+  "summary": "Testing - Fakes",
+  "source": "testing_fakes.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "Flutter",
+    "Mobile Development",
+    "Mobile App"
+  ],
+  "tags": [
+    "Testing",
+    "Mobile Development",
+    "Mobile App"
+  ],
+  "feedback": "",
+  "url": ""
+}

@@ -1,0 +1,29 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "updated": "2020-04-26T00:00:00-00:00",
+  "id": "testing_screen",
+  "duration": 5,
+  "title": "Testing - Screen",
+  "authors": "Eric Narvaez",
+  "summary": "Testing - Screen",
+  "source": "testing_screen.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "Flutter",
+    "Mobile Development",
+    "Mobile App"
+  ],
+  "tags": [
+    "Clean",
+    "Repository",
+    "Mobile Development",
+    "Mobile App"
+  ],
+  "feedback": "",
+  "url": ""
+}
