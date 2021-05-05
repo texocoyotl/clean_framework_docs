@@ -1,4 +1,6 @@
+
 <!doctype html>
+
 <html>
 <head>
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
@@ -15,34 +17,115 @@
     .error {
       color: red;
     }
-    .center {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      width: 50%;
-    }
-    .FlowChartColored{
-      width: 100px;
-      height: 100px;
-    }
   </style>
 </head>
 <body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
   <google-codelab codelab-gaid=""
                   id="clean_service_calls"
                   title="Clean - Creating a Service Call"
-                  environment="web">
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Prepare" duration="0">
+        <p>Before to create your first service call, you need to know below informations:</p>
+<ul>
+<li>Base url, endpoint path, HTTP method, request query/body</li>
+<li>Response contentType, response structure(for JSON)</li>
+</ul>
 
-      <!--  Clean - Creating a Service Call -->
-      <google-codelab-step label="Clean - Creating a Service Call" duration="5">
-        <li>The <code>Screen</code> matches the view model to the the UI elements</li>
+
       </google-codelab-step>
+    
+      <google-codelab-step label="Implement JsonRequestModel" duration="0">
+        <p>You need to implement your request model with parameters and toJson function. The toJson function is used for request body of post, put &amp; patch method.</p>
+<pre><code>class DemoRequestModel implements JsonRequestModel {
+    final String accountId;
 
+    DemoRequestModel({this.accountId}) : assert(() {
+        return accountId != null &amp;&amp; accountId.isNotEmpty;
+    }());
+
+    Map&lt;String, dynamic&gt; toJson() {
+        Map&lt;String, dynamic&gt; data = {&#34;accountId&#34;: accountId};
+        return data;
+    }
+}
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Implement JsonResponseModel" duration="0">
+        <p>JsonResponseModel defined with EquatableMixin, so you have to import Equatable first. And then implement your response model with parameters and fromJson constructor.</p>
+<pre><code>class DemoResponseModel extends Equatable implements JsonResponseModel {
+    final String accountId;
+
+    DemoResponseModel(this.accountId) : assert(() {
+        return accountId != null &amp;&amp; accountId.isNotEmpty;
+    }());
+
+    @override
+    List&lt;Object&gt; get props =&gt; [this.accountId];
+
+    DemoResponseModel.fromJson(Map&lt;String, dynamic&gt; json)
+        : accountId = json[&#39;accountId&#39;] ?? &#34;&#34;;
+}
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Inherit from EitherService" duration="0">
+        <p>To create your service class, you need to extend EitherService and 2 generic types from JsonRequestModel &amp; JsonResponseModel.</p>
+<pre><code>class DemoService extends EitherService&lt;DemoRequestModel, DemoResponseModel&gt; {
+    DemoService() : super(
+        method: RestMethod.get,
+        restApi: restApi,//extends from RestApi, RestApi is a class of Clean_Framework 
+        path: &#34;/demo&#34;);
+}
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Override parseResponse" duration="0">
+        <p>In most of cases, you need to override parseResponse for EitherService to parse JSON objct(Map) to your ResponseModel.</p>
+<pre><code>@override
+DemoResponseModel parseResponse(Map&lt;String, dynamic&gt; jsonResponse) {
+    return DemoResponseModel.fromJson(jsonResponse);
+}
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Handle onError" duration="0">
+        <p>EitherService will invoke onError function if the response code is not 200 or 201. To handle those situations, you need to override onError function. Then you can find the failure object in response.</p>
+<pre><code>@override
+ServiceFailure onError(RestResponseType responseType, Map&lt;String, dynamic&gt; jsonResponse) {
+    if (responseType == RestResponseType.unauthorized)
+        return TokenInvalidServiceFailure();//this is a sub type of GeneralServiceFailure
+    else
+        return GeneralServiceFailure();
+}
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="How to test" duration="0">
+        
+
+      </google-codelab-step>
+    
   </google-codelab>
-          <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
-          <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
-          <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
-          <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
-          <script src="//support.google.com/inapp/api.js"></script>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
 </body>
 </html>
