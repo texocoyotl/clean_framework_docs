@@ -11,12 +11,20 @@ You can download Mockoon application from [here](https://mockoon.com/#download),
 ![Mockoon launching screen](mockoon_create_a_service/mockoon_launch.jpg)
 
 ## Import existing services
-Once launch your Mockoon application, click Import/export button on the menu. Then select Mockoon's format -> Import from a file(JSON). And select the mockoon.json file under integration_test folder.
+Once launch your Mockoon application, click Import/export button on the menu. Then select Mockoon's format -> Import from a file(JSON). And select the **mockoon.json** file under **integration_test** folder.
+
 ![Mockoon import menu](mockoon_create_a_service/mockoon_import.jpg)
+
 ## Launch the server
 After import, you should see an enviroment named HNB(HN) in the slide. Select it and clike the green play button(Start server).
 
 ![Mockoon start button](mockoon_create_a_service/mockoon_start.jpg)
+
+## Run integration test
+Use the command below to run integration test.
+
+    flutter drive -t integration_test/integration_tests.dart --driver=integration_test/integration_test_driver.dart --flavor qa
+
 
 ## Rules
 All services must be arranged in alphabetical order by name. 
