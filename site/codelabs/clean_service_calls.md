@@ -1,6 +1,6 @@
 summary: Clean - Creating a Service Call
 id: clean_service_calls
-categories: flutter
+categories: Flutter
 tags: REST, REST Service, API, API Service, Flutter, Service, Clean Service
 status:  Active
 authors: Eric Narvaez
@@ -51,7 +51,7 @@ JsonResponseModel defined with EquatableMixin, so you have to import Equatable f
 To create your service class, you need to extend EitherService and 2 generic types from JsonRequestModel & JsonResponseModel. 
 
     class DemoService extends EitherService<DemoRequestModel, DemoResponseModel> {
-        DemoService() : super(
+        DemoService({RestApi restApi}) : super(
             method: RestMethod.get,
             restApi: restApi,//extends from RestApi, RestApi is a class of Clean_Framework 
             path: "/demo");
@@ -78,4 +78,13 @@ EitherService will invoke onError function if the response code is not 200 or 20
             return GeneralServiceFailure();
     }
 ## How to test
+We use [mockito](https://pub.dev/packages/mockito) to mock our unit tests. The key rule is mock everything except the one you want to test/verify. Specific to service, you need to mock RestApi and put it into the service constructor. 
 
+    test('Demo service test', () async {
+        final mockedApi = MockApi();
+        final service = DemoService(restApi: mockedApi);
+        final response = await service.request();
+        expect(response, isNotNull);
+    });
+
+For different test case, you can mock the RestApi with different response. You can learn how to mock scenariors at [here](../)

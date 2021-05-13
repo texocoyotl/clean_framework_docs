@@ -28,13 +28,14 @@
                   feedback-link="">
     
       <google-codelab-step label="Download &amp; install Mockoon App" duration="0">
-        <p>You can download Mockoon application from <a href="https://mockoon.com/#download" target="_blank">here</a>, and follow the guide to install it on your OS. <img alt="Mockoon launching screen" src="img/bfe018579de06547.jpg"></p>
+        <p><a href="https://mockoon.com/#download" target="_blank">here</a>, and follow the guide to install it on your OS. <img alt="Mockoon launching screen" src="img/bfe018579de06547.jpg"></p>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="Import existing services" duration="0">
-        <p>Once launch your Mockoon application, click Import/export button on the menu. Then select Mockoon&#39;s format -&gt; Import from a file(JSON). And select the mockoon.json file under integration_test folder. <img alt="Mockoon import menu" src="img/46685fe80ecda195.jpg"></p>
+        <p>Once launch your Mockoon application, click Import/export button on the menu. Then select Mockoon&#39;s format -&gt; Import from a file(JSON). And select the <strong>mockoon.json</strong> file under <strong>integration_test</strong> folder.</p>
+<p class="image-container"><img alt="Mockoon import menu" src="img/46685fe80ecda195.jpg"></p>
 
 
       </google-codelab-step>
@@ -42,6 +43,14 @@
       <google-codelab-step label="Launch the server" duration="0">
         <p>After import, you should see an enviroment named HNB(HN) in the slide. Select it and clike the green play button(Start server).</p>
 <p class="image-container"><img alt="Mockoon start button" src="img/6170ca5dea01f186.jpg"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Run integration test" duration="0">
+        <p>Use the command below to run integration test.</p>
+<pre><code>flutter drive -t integration_test/integration_tests.dart --driver=integration_test/integration_test_driver.dart --flavor qa
+</code></pre>
 
 
       </google-codelab-step>
