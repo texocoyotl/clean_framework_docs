@@ -1,4 +1,4 @@
-# Environment Setup Requirements
+# Environment Setup
 
 1) Install "Go"
 	- [Go](https://golang.org/dl/) language
