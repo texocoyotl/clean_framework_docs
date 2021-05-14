@@ -28,7 +28,7 @@
                   feedback-link="">
     
       <google-codelab-step label="Introduction" duration="0">
-        <p class="image-container"><img alt="Presentation Layer" src="img/b579411436f9dab.png"></p>
+        <p class="image-container"><img  title="Presentation Layer" alt="Presentation Layer" src="img/b579411436f9dab.png"></p>
 <ul>
 <li><strong>Feature Widget</strong> : Creates <code>BLoC</code> and associated a Presenter to the <code>BLoC</code></li>
 <li><strong>Presenter</strong> : Creates Screen based on <code>BuildContext</code>, <code>BLoC</code>, and <code>ViewModel</code></li>
@@ -39,8 +39,10 @@
       </google-codelab-step>
     
       <google-codelab-step label="Feature Widget" duration="0">
-        <p class="image-container"><img alt="Presentation Layer" src="img/dbd25cab6c0fffab.png"></p>
-<p><strong>Feature Widget</strong> is a <code>StatelessWidget</code> that describes the feature user interface by initializing the BLoc and associate a presenter to the <code>BLoC</code>.  </p>
+
+       
+        <p class="image-container"><img alt="Presentation Layer" title="ui directory" src="img/dbd25cab6c0fffab.png"></p>
+<p><strong>Feature Widget</strong> is a <code>StatelessWidget</code> that describes the user interface of feature by initializing the <code>BLoC</code> and associate a presenter to the <code>BLoC</code>.  </p>
 <aside class="special">
   <p> The <code>FeatureWidget</code> is the start point of each feature.</p>
 </aside>
@@ -60,13 +62,13 @@
       </google-codelab-step>
     
       <google-codelab-step label="Presenter" duration="0">
-        <p class="image-container"><img alt="Presentation Layer" src="img/92d5ee5b6a20d66e.png"></p>
+        <p class="image-container"><img alt="Presentation Layer" title="ui directory" src="img/92d5ee5b6a20d66e.png"></p>
 <div></div>
-        <p><strong>Presenter</strong> creates three states of the screen such as Loading Screen, Error Screen, and Screen also manages all screen actions.</p>
+        <p>All feature's <strong>Presenter</strong> should extent <code language="language-dart"> Presenter< Bloc, ViewModel, Screen> </code> to create the Screen, Loading Screen, Error Screen, and also manages all screen actions.</p>
         <p></p>
         <pre><code language="language-dart" class="language-dart">
     class ExamplePresenter extends Presenter&lt;ExampleBloc, ExampleViewModel, ExampleScreen&gt;  {     
-      
+                          
           @override
           Stream&lt;DepositCheckCardViewModel&gt; getViewModelStream (ExampleBloc bloc) {...
 
@@ -82,10 +84,10 @@
     }
 </code></pre>
 <ul>
-  <li><code>getViewModelStream</code> method handles <code>ViewModel</code> changes with <code>BLoc</code> listener.</li>
-  <li><code>buildLoadingScreen</code> method creates the loading screen.</li>
-  <li><code>buildErrorScreen</code> method creates the error screen.<br></li>
-  <li><code>buildScreen</code> method creates the screen by passing the associated <code>ViewModel</code>.<br></li>
+  <li><code>getViewModelStream</code> method handles all changes related to <code>ViewModel</code> by <code>BLoc</code> listener.</li>
+  <li><code>buildLoadingScreen</code> method return a <code>Widget</code> to create the loading screen.</li>
+  <li><code>buildErrorScreen</code> method return a <code>Widget</code> to create the error screen.<br></li>
+  <li><code>buildScreen</code> method return a <code>Screen</code> to create the UI by passing the associated <code>ViewModel</code> and also the action functions.<br></li>
   </ul>
 
 <pre><code language="language-dart" class="language-dart">
@@ -101,17 +103,17 @@
 <aside class="special">
   <p>All screen action could handle in a separated action class</p>
   <ul>
-    <li><code>BLoC</code> and <code>ViewModel</code> could pass on construction point.<br></li>
+    <li><code>BLoC</code> and <code>ViewModel</code> could pass on class constructor.<br></li>
     </ul>
 </aside>
 <pre><code language="language-dart" class="language-dart">
-      class ExamplePressenterActions {
+    class ExamplePressenterActions {
       
         ExamplePressenterActions();
 
-      navigateToDetail(BuildContext context) {
-        Navigator.of(context).pushNamed(Router.detailRoute);
-      }
+        navigateToDetail(BuildContext context) {
+          Navigator.of(context).pushNamed(Router.detailRoute);
+        }
     }
 </code></pre>
 
@@ -119,8 +121,8 @@
       </google-codelab-step>
     
       <google-codelab-step label="Screen" duration="0">
-        <p class="image-container"><img alt="Presentation Layer" src="img/5b0f27161d8358bc.png"></p>
-<p><strong>Screen</strong> or UI widget presents the specific Use Case base on <code>ViewModel</code>.</p>
+        <p class="image-container"><img alt="Presentation Layer" title="ui directory" src="img/5b0f27161d8358bc.png"></p>
+<p><strong>Screen</strong> or UI widget is a <code>StatelessWidget</code> that presents the specific Use Case base on <code>ViewModel</code>.</p>
 <pre><code language="language-dart" class="language-dart">    class ExampleScreen extends Screen {
         final ExampleViewModel viewModel;
         final ExamplePressenterActions pressenterActions;
@@ -150,28 +152,70 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Widget Test" duration="0">
+      <google-codelab-step label="Screen Test" duration="0">
+
         <p>The purpose of this test is to ensure every interaction the user makes produces the expected result.</p>
-<p>Most common finder method:</p>
-<ul>
-<li><code>find.byKey()</code> : Finds widgets by searching for one with a particular [Key].</li>
-<li><code>find.byType()</code> : Finds widgets by searching for widgets with a particular type.</li>
-<li><code>find.text()</code> : Finds [Text] and [EditableText] widgets containing string equal to the text argument.<br></li>
-</ul>
-<p>Testing TextField:</p>
-<ul>
-<li><code>tester.enterText(Finder finder, String text)</code> : Give the text input widget specified by [finder] the focus and enter [text] as if it been provided by the onscreen keyboard.</li>
-</ul>
-<p>Testing Button Action:</p>
-<ul>
-<li><code>tester.tap(Finder finder)</code> : Dispatch a pointer down / pointer up sequence at the center of the given widget, assuming it is exposed.</li>
-</ul>
+       
+        
+
+        <p class="image-container"><img  title="Example Screen" alt="Presentation Layer" src="img/screenview.png
+          "></p>
+
+
+          <p> First step of screen test is to verify appearance of all objects on the screen</p>
+
+
+<ol type="1">
+  <li>Before implement test widget, need to create a sample <code>ViewModel</code></li>
+<li>Create a <code>MaterialApp</code> object for testing</li>
+
+<pre><code language="language-dart" class="language-dart">    MaterialApp testWidget = MaterialApp(
+      home: ExampleScreen(
+          viewModel: exampleViewModel,
+          pressenterAction: mockPressenterAction),
+    );
+</code></pre>
+<li><code>pumpWidget</code> calls runApp, and also triggers a frame to paint the app.  <pre><code language="language-dart" class="language-dart">await tester.pumpWidget(testWidget);
+</code></pre>
+</li>
+<li>Create the Finders 
+  <ul>
+    <li><code>find.byKey()</code> : Finds widgets by searching for one with a particular [Key].</li>
+    <li><code>find.byType()</code> : Finds widgets by searching for widgets with a particular type.</li>
+    <li><code>find.text()</code> : Finds [Text] and [EditableText] widgets containing string equal to the text argument.<br></li>
+    </ul>
+  <pre>
+  
+  <code language="language-dart" class="language-dart">final titleFinder = find.text('Pay Card Balance');
+  final dividerFinder = find.byType(Divider);
+  final descFinder = find.text('No Payment Due');
+  final currentBalanceFinder =  find.text('Card Balance: \$${exampleViewModel.currentBalance}');
+  final buttonFinder =  find.byKey(Key('Pay-More-Button'));
+
+</code></pre>
+</li>
+
+<li>Use the <code>findsOneWidget</code> matcher to verify that the Text widgets appear exactly once in the widget tree.  <pre>
+  <code language="language-dart" class="language-dart">expect(titleFinder, findsOneWidget);
+  expect(dividerFinder, findsOneWidget);
+  expect(descFinder, findsOneWidget);
+  expect(currentBalanceFinder, findsOneWidget);
+  expect(buttonFinder, findsOneWidget);
+</code></pre>
+</li>
+</ol>
+
+<p> You can see the test result below.</p>
+<iframe src="https://dartpad.dev/embed-flutter.html?id=8aa0515a3d513b9720dd9a399c4c79a3&theme=dark"
+style="width: 750px; height: 500px;"></iframe>
 
 
       </google-codelab-step>
+
+     
     
-      <google-codelab-step label="Sample Presenter Test" duration="0">
-        <p>This test should verify the appearance of all screen object 
+      <google-codelab-step label="Presenter Test" duration="0">
+        <p>This test should verify the appearance of Presenter object 
         </p>        
           <ul>
           <ol type="1">
@@ -201,46 +245,7 @@
         
               </google-codelab-step>
 
-      <google-codelab-step label="Sample Screen Test" duration="0">
-
-        <ul>
-<li>Test should verify back button action on the screen  <ol type="1">
-<li>create a <code>MockPressenterAction</code> to cover presenter actions</li>
-</ol>
-</li>
-</ul>
-<pre><code language="language-dart" class="language-dart">    class MockPressenterAction extends Mock implements ExamplePressenterActions {}
-</code></pre>
-<ol type="1">
-<li>create a <code>ExampleViewModel</code> and pass to screen</li>
-<li>create a <code>MaterialApp</code> object</li>
-</ol>
-<pre><code language="language-dart" class="language-dart">    MaterialApp testWidget = MaterialApp(
-      home: ExampleScreen(
-          viewModel: exampleViewModel,
-          pressenterAction: mockPressenterAction),
-    );
-</code></pre>
-<ol type="1">
-<li><code>pumpWidget</code> calls runApp, and also triggers a frame to paint the app.  <pre><code>await tester.pumpWidget(testWidget);
-</code></pre>
-</li>
-<li>Find back button  <pre><code>final finder = find.byKey(Key(&#39;Back-Button&#39;));;
-</code></pre>
-</li>
-<li>Tap on back button  <pre><code>await tester.tap(finder);
-</code></pre>
-</li>
-<li>Verify that a method on a mock object was called with the given arguments.  <pre><code>verify(mockPressenterAction.popNavigationListener(any)).called(1);
-</code></pre>
-</li>
-</ol>
-
-<iframe src="https://dartpad.dev/embed-flutter.html?id=8aa0515a3d513b9720dd9a399c4c79a3&theme=dark"
-style="width: 750px; height: 500px;"></iframe>
-
-
-      </google-codelab-step>
+     
     
      
     
