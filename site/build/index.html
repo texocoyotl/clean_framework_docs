@@ -147,7 +147,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               
           </paper-listbox>
         </paper-dropdown-menu> -->
-        </div>
+        <paper-dropdown-menu
+          label="Filter by category"
+          class="dropdown-filter"
+          no-label-float
+          noink no-animations
+        >
+          <paper-listbox
+            id="categorylist"
+            slot="dropdown-content"
+            class="dropdown-content"
+            on-iron-activate="onCategoryActivate"
+            attr-for-selected="filter"
+          >
+              <paper-item filter="Flutter">Flutter</paper-item>
+                <paper-item filter="flutter">flutter</paper-item>
+                
+          </paper-listbox>
+        </paper-dropdown-menu></div>
 
       <card-sorter id="cards" class="site-width">
         
@@ -302,16 +319,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             
             <a href="/codelabs/clean_screen_presenter/index.html?index=..%2F..index" on-tap="navigate"
                class="codelab-card category-flutter"
-               data-category="Flutter,Mobile Development,Mobile App"
+               data-category="flutter"
                data-title="Clean - The Screen and Presenter"
-               data-duration="5"
-               data-updated="2020-04-26T00:00:00-00:00"
-               data-tags="Clean,Screen,Presenter,Mobile Development,Mobile App"
+               data-duration="10"
+               data-updated="2021-05-12T09:30:40-04:00"
+               data-tags="presenter,scerrn,test,ui,widget test"
                data-pin="">
               <div class="description">Clean - The Screen and Presenter</div>
               <div class="card-duration">
-                <span>5 min </span>
-                <span>Updated Apr 26, 2020</span>
+                <span>10 min </span>
+                <span>Updated May 12, 2021</span>
               </div>
               <div class="card-footer">
                 <div class="category-icon flutter-icon"></div>
@@ -331,6 +348,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                data-pin="">
               <div class="description">Clean - Creating a Service Call</div>
               <div class="card-duration">
+
                 <span>20 min </span>
                 <span>Updated May 10, 2021</span>
               </div>
@@ -346,12 +364,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                class="codelab-card category-flutter"
                data-category="flutter"
                data-title="Mockoon - Integration test Service"
+
                data-duration="10"
                data-updated="2021-05-11T10:49:19-04:00"
                data-tags="api,api service,flutter,mock,rest,rest service,service"
                data-pin="">
               <div class="description">Mockoon - Integration test Service</div>
               <div class="card-duration">
+
                 <span>10 min </span>
                 <span>Updated May 11, 2021</span>
               </div>

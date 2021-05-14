@@ -1,4 +1,6 @@
+
 <!doctype html>
+
 <html>
 <head>
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
@@ -15,34 +17,245 @@
     .error {
       color: red;
     }
-    .center {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      width: 50%;
-    }
-    .FlowChartColored{
-      width: 100px;
-      height: 100px;
-    }
   </style>
 </head>
 <body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
   <google-codelab codelab-gaid=""
                   id="clean_screen_presenter"
                   title="Clean - The Screen and Presenter"
-                  environment="web">
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Introduction" duration="0">
+        <p class="image-container"><img  title="Presentation Layer" alt="Presentation Layer" src="img/b579411436f9dab.png"></p>
+<ul>
+<li><strong>Feature Widget</strong> : Creates <code>BLoC</code> and associated a Presenter to the <code>BLoC</code></li>
+<li><strong>Presenter</strong> : Creates Screen based on <code>BuildContext</code>, <code>BLoC</code>, and <code>ViewModel</code></li>
+<li><strong>Screen</strong> : The actual UI widget being present for the specific Use Case and This is where the view model will map the data to the UI</li>
+</ul>
 
-      <!--  Mockoon - Create a Service -->
-      <google-codelab-step label="Clean - The Screen and Presenter" duration="5">
-        <li>The <code>Screen</code> matches the view model to the the UI elements</li>
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Feature Widget" duration="0">
+
+       
+        <p class="image-container"><img alt="Presentation Layer" title="ui directory" src="img/dbd25cab6c0fffab.png"></p>
+<p><strong>Feature Widget</strong> is a <code>StatelessWidget</code> that describes the user interface of feature by initializing the <code>BLoC</code> and associate a presenter to the <code>BLoC</code>.  </p>
+<aside class="special">
+  <p> The <code>FeatureWidget</code> is the start point of each feature.</p>
+</aside>
+
+<pre translate="no"><code language="language-dart" class="language-dart">    class ExampleWidget extends StatelessWidget {
+      @override
+      Widget build(BuildContext context) {
+        return BlocProvider&lt;ExampleBloc&gt;(
+          create: (_) =&gt; ExampleBloc(),
+          child: ExamplePresenter(),
+        );
+      }
+    }
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Presenter" duration="0">
+        <p class="image-container"><img alt="Presentation Layer" title="ui directory" src="img/92d5ee5b6a20d66e.png"></p>
+<div></div>
+        <p>All feature's <strong>Presenter</strong> should extent <code language="language-dart"> Presenter< Bloc, ViewModel, Screen> </code> to create the Screen, Loading Screen, Error Screen, and also manages all screen actions.</p>
+        <p></p>
+        <pre><code language="language-dart" class="language-dart">
+    class ExamplePresenter extends Presenter&lt;ExampleBloc, ExampleViewModel, ExampleScreen&gt;  {     
+                          
+          @override
+          Stream&lt;DepositCheckCardViewModel&gt; getViewModelStream (ExampleBloc bloc) {...
+
+          @override
+          Widget buildLoadingScreen(BuildContext context) {...
+
+          @override
+          Widget buildErrorScreen(BuildContext context, Object? error) {...
+
+          @override
+          ExampleScreen buildScreen(BuildContext context, ExampleBloc  bloc, ExampleViewModel viewModel) {...    
+  
+    }
+</code></pre>
+<ul>
+  <li><code>getViewModelStream</code> method handles all changes related to <code>ViewModel</code> by <code>BLoc</code> listener.</li>
+  <li><code>buildLoadingScreen</code> method return a <code>Widget</code> to create the loading screen.</li>
+  <li><code>buildErrorScreen</code> method return a <code>Widget</code> to create the error screen.<br></li>
+  <li><code>buildScreen</code> method return a <code>Screen</code> to create the UI by passing the associated <code>ViewModel</code> and also the action functions.<br></li>
+  </ul>
+
+<pre><code language="language-dart" class="language-dart">
+      @override
+      DepositCheckCardScreen buildScreen(BuildContext   context,
+          ExampleBloc bloc, ExampleViewModel  viewModel) {
+        return ExampleScreen(
+          viewModel: viewModel,
+          pressenterActions: ExamplePressenterActions(),
+        );
+      }
+</code></pre>
+<aside class="special">
+  <p>All screen action could handle in a separated action class</p>
+  <ul>
+    <li><code>BLoC</code> and <code>ViewModel</code> could pass on class constructor.<br></li>
+    </ul>
+</aside>
+<pre><code language="language-dart" class="language-dart">
+    class ExamplePressenterActions {
+      
+        ExamplePressenterActions();
+
+        navigateToDetail(BuildContext context) {
+          Navigator.of(context).pushNamed(Router.detailRoute);
+        }
+    }
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Screen" duration="0">
+        <p class="image-container"><img alt="Presentation Layer" title="ui directory" src="img/5b0f27161d8358bc.png"></p>
+<p><strong>Screen</strong> or UI widget is a <code>StatelessWidget</code> that presents the specific Use Case base on <code>ViewModel</code>.</p>
+<pre><code language="language-dart" class="language-dart">    class ExampleScreen extends Screen {
+        final ExampleViewModel viewModel;
+        final ExamplePressenterActions pressenterActions;
+
+        ExampleScreen(
+          {required this.viewModel, required this.pressenterActions});
+
+        @override
+        Widget build(BuildContext context) {...
+
+    }
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="How To Test UI" duration="0">
+        <ol type="1">
+<li>Add the flutter_test dependency.</li>
+<li>Create a widget to test.</li>
+<li>Create a <code>testWidgets</code> test.</li>
+<li>Build the widget using the <code>WidgetTester</code>.</li>
+<li>Search for the widget using a <code>Finder</code>.</li>
+<li>Verify the widget using a <code>Matcher</code>.</li>
+</ol>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Screen Test" duration="0">
+
+        <p>The purpose of this test is to ensure every interaction the user makes produces the expected result.</p>
+       
+        
+
+        <p class="image-container"><img  title="Example Screen" alt="Presentation Layer" src="img/screenview.png
+          "></p>
+
+
+          <p> First step of screen test is to verify appearance of all objects on the screen</p>
+
+
+<ol type="1">
+  <li>Before implement test widget, need to create a sample <code>ViewModel</code></li>
+<li>Create a <code>MaterialApp</code> object for testing</li>
+
+<pre><code language="language-dart" class="language-dart">    MaterialApp testWidget = MaterialApp(
+      home: ExampleScreen(
+          viewModel: exampleViewModel,
+          pressenterAction: mockPressenterAction),
+    );
+</code></pre>
+<li><code>pumpWidget</code> calls runApp, and also triggers a frame to paint the app.  <pre><code language="language-dart" class="language-dart">await tester.pumpWidget(testWidget);
+</code></pre>
+</li>
+<li>Create the Finders 
+  <ul>
+    <li><code>find.byKey()</code> : Finds widgets by searching for one with a particular [Key].</li>
+    <li><code>find.byType()</code> : Finds widgets by searching for widgets with a particular type.</li>
+    <li><code>find.text()</code> : Finds [Text] and [EditableText] widgets containing string equal to the text argument.<br></li>
+    </ul>
+  <pre>
+  
+  <code language="language-dart" class="language-dart">final titleFinder = find.text('Pay Card Balance');
+  final dividerFinder = find.byType(Divider);
+  final descFinder = find.text('No Payment Due');
+  final currentBalanceFinder =  find.text('Card Balance: \$${exampleViewModel.currentBalance}');
+  final buttonFinder =  find.byKey(Key('Pay-More-Button'));
+
+</code></pre>
+</li>
+
+<li>Use the <code>findsOneWidget</code> matcher to verify that the Text widgets appear exactly once in the widget tree.  <pre>
+  <code language="language-dart" class="language-dart">expect(titleFinder, findsOneWidget);
+  expect(dividerFinder, findsOneWidget);
+  expect(descFinder, findsOneWidget);
+  expect(currentBalanceFinder, findsOneWidget);
+  expect(buttonFinder, findsOneWidget);
+</code></pre>
+</li>
+</ol>
+
+<p> You can see the test result below.</p>
+<iframe src="https://dartpad.dev/embed-flutter.html?id=8aa0515a3d513b9720dd9a399c4c79a3&theme=dark"
+style="width: 750px; height: 500px;"></iframe>
+
+
       </google-codelab-step>
 
+     
+    
+      <google-codelab-step label="Presenter Test" duration="0">
+        <p>This test should verify the appearance of Presenter object 
+        </p>        
+          <ul>
+          <ol type="1">
+        <li>create a <code>MaterialApp</code> object</li>
+        
+        
+        
+        <pre><code language="language-dart" class="language-dart">    MaterialApp testWidget = MaterialApp(
+              home: BlocProvider&lt;ExampleBlockMock&gt;(
+                create: (_) =&gt; ExampleBlockMock(),
+                child: ExamplePresenter(),
+              ),
+            );
+        </code></pre>
+        
+        <li>pumpWidget calls runApp, and also triggers a frame to paint the app.  <pre><code>await tester.pumpWidget(testWidget);
+        </code></pre>
+        </li>
+        <li>Find <code>ExamplePresenter</code> widget  <pre><code>final finder = find.byType(ExamplePresenter);
+        </code></pre>
+        </li>
+        <li>Expect to find one widget  <pre><code>expect(finder, findsOneWidget);
+        </code></pre>
+        </li>
+        </ol>
+        
+        
+              </google-codelab-step>
+
+     
+    
+     
+    
   </google-codelab>
-          <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
-          <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
-          <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
-          <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
-          <script src="//support.google.com/inapp/api.js"></script>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
 </body>
 </html>
