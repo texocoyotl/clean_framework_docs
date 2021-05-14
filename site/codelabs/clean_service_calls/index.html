@@ -79,7 +79,7 @@
       <google-codelab-step label="Inherit from EitherService" duration="0">
         <p>To create your service class, you need to extend EitherService and 2 generic types from JsonRequestModel &amp; JsonResponseModel.</p>
 <pre><code>class DemoService extends EitherService&lt;DemoRequestModel, DemoResponseModel&gt; {
-    DemoService() : super(
+    DemoService({RestApi restApi}) : super(
         method: RestMethod.get,
         restApi: restApi,//extends from RestApi, RestApi is a class of Clean_Framework 
         path: &#34;/demo&#34;);
@@ -115,7 +115,16 @@ ServiceFailure onError(RestResponseType responseType, Map&lt;String, dynamic&gt;
       </google-codelab-step>
     
       <google-codelab-step label="How to test" duration="0">
-        
+        <p>We use <a href="https://pub.dev/packages/mockito" target="_blank">mockito</a> to mock our unit tests. The key rule is mock everything except the one you want to test/verify. Specific to service, you need to mock RestApi and put it into the service constructor.</p>
+<pre><code>test(&#39;Demo service test&#39;, () async {
+    final mockedApi = MockApi();
+    final service = DemoService(restApi: mockedApi);
+    final response = await service.request();
+    expect(response, isNotNull);
+});
+</code></pre>
+<p>For different test case, you can mock the RestApi with different response. You can learn how to mock scenariors at <a href="../" target="_blank">here</a></p>
+
 
       </google-codelab-step>
     
