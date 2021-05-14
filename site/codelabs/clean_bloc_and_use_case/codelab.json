@@ -2,29 +2,27 @@
   "environment": "web",
   "format": "html",
   "prefix": "https://storage.googleapis.com",
-  "updated": "2020-04-26T00:00:00-00:00",
+  "mainga": "UA-49880327-14",
+  "updated": "2021-05-14T17:24:11-04:00",
   "id": "clean_bloc_and_use_case",
-  "duration": 5,
-  "title": "Clean - The Bloc and Use Case",
+  "duration": 10,
+  "title": "Clean - The BLoC and Use Case",
   "authors": "Eric Narvaez",
   "summary": "Clean - The Bloc and Use Case",
   "source": "clean_bloc_and_use_case.md",
   "theme": "",
   "status": [
-    "published"
+    "active"
   ],
   "category": [
-    "Flutter",
-    "Mobile Development",
-    "Mobile App"
+    "flutter"
   ],
   "tags": [
-    "Clean",
-    "Bloc",
-    "Use Case",
-    "Mobile Development",
-    "Mobile App"
+    "bloc",
+    "clean",
+    "flutter",
+    "service",
+    "use case"
   ],
-  "feedback": "",
-  "url": ""
+  "url": "clean_bloc_and_use_case"
 }
