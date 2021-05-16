@@ -1,10 +1,12 @@
+
 <!doctype html>
+
 <html>
 <head>
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
   <meta name="theme-color" content="#4F7DC9">
   <meta charset="UTF-8">
-  <title>Clean - The Bloc and Use Case</title>
+  <title>Clean - The BLoC and Use Case</title>
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
   <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
@@ -15,34 +17,133 @@
     .error {
       color: red;
     }
-    .center {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      width: 50%;
-    }
-    .FlowChartColored{
-      width: 100px;
-      height: 100px;
-    }
   </style>
 </head>
 <body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
   <google-codelab codelab-gaid=""
                   id="clean_bloc_and_use_case"
-                  title="Clean - The Bloc and Use Case"
-                  environment="web">
+                  title="Clean - The BLoC and Use Case"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Definition" duration="0">
+        <ul>
+<li>BLoC - Business Logic Component (BLoC), the core of the feature. A bloc should be placed under bloc folder and named with suffix <strong>_bloc.dart</strong>.</li>
+<li>Use Case - A specific use case of the feature. A use case should be placed under bloc folder and named with suffix <strong>_usecase.dart</strong>.</li>
+</ul>
+<p class="image-container"><img alt="BLoC folder" src="img/de64dc4a1770f48c.jpg"></p>
 
-      <!--  Clean - The Bloc and Use Case -->
-      <google-codelab-step label="Clean - The Bloc and Use Case" duration="5">
-        <li>The <code>Screen</code> matches the view model to the the UI elements</li>
+
       </google-codelab-step>
+    
+      <google-codelab-step label="BLoC" duration="0">
+        <p>Business Logic Component (BLoC), the core of the feature.</p>
+<ul>
+<li>A bloc should be placed under bloc folder and named with suffix <strong>_bloc.dart</strong>.</li>
+<li>A bloc should extend from <strong>Bloc</strong>(a class defined by clean_framework).</li>
+<li>A bloc can have multiple <strong>Pipe</strong>(a class defined by clean_framework, a wrapper of StreamController).</li>
+<li>A bloc can have multiple <strong>UseCase</strong>(a class defined by clean_framework).</li>
+<li>All pipes must be disposed in dispose function of the bloc.  <pre><code>class DemoBloc extends Bloc {
+    final viewModelPipe = Pipe&lt;DemoViewModel&gt;();
 
+
+    late DemoUseCase _demoUseCase;
+
+
+    DemoBloc({DemoUseCase? demoUseCase}) {
+        _demoUseCase = demoUseCase ??
+            DemoUseCase(
+            fetchDataCallback: (viewmodel) {
+                return viewModelPipe.send(viewmodel);
+            },
+            );
+        _demoUseCase.fetchData();
+    }
+
+
+    @override
+    void dispose() {
+        viewModelPipe.dispose();
+    }
+}
+</code></pre>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Use Case" duration="0">
+        <p>A specific use case of the feature.</p>
+<ul>
+<li>A use case should be placed under bloc folder and named with suffix <strong>_usecase.dart</strong>.</li>
+<li>A use case should extend from <strong>UseCase</strong>(a class defined by clean_framework).</li>
+<li>A use case can have multiple <strong>ViewModelCallback</strong>(a type defined by clean_framework with a generic ViewModel type).</li>
+<li>Create specific methods to handle specific logic.</li>
+<li>All results must be push back to bloc via callback.  <pre><code>class DemoUseCase extends UseCase {
+    ViewModelCallback&lt;DemoViewModel&gt;? fetchDataCallback;
+    DemoUseCase({this.fetchDataCallback});
+    void fetchData() {
+        if (fetchDataCallback != null) {
+        fetchDataCallback!(DemoViewModel());
+        }
+    }
+}
+</code></pre>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Relationship" duration="0">
+        <p>A bloc can have multiple use cases. <strong>BLoC</strong> is the owner &amp; invoker of the <strong>Use Case</strong>. <img alt="BLoC UseCase" src="img/c55b0b13c48f3794.jpg"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Responsibility" duration="0">
+        <ul>
+<li>Bloc - Listen events/data from presenter via pipes, and invoke the use case by specific business logic. Receive updated viewmodel from UseCase via callback, and send the viewmodel to presenter via pipe.</li>
+<li>Use Case - Collaborate with Repository and ServiceAdapter, send updated viewmodel to the bloc via callback.</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="How to test" duration="0">
+        <p>We use <a href="https://pub.dev/packages/mockito" target="_blank">mockito</a> to mock our unit tests. The key rule is mock everything except the one you want to test/verify.</p>
+<ul>
+<li>Bloc test, you need to mock all UseCases and put them into the bloc constructor. Then trigger the target method by invoke or launch the pipe. And verify if you can got the correct data/viewmodel.  <pre><code>test(&#39;Demo bloc test&#39;, () async {
+    final mockedUseCase = MockUseCase();
+    final bloc = Demobloc(demoUseCase: mockedUseCase);
+    bloc.viewModelPipe.receive.listen(expectAsync((viewModel) {
+        expect(viewModel, mockedUseCase.viewModel);
+    }));
+});
+</code></pre>
+</li>
+<li>UseCase test, you need to mock all callbacks and put them into the use case constructor. Then invoke the target method. And verify if the certained callback was called.  <pre><code>test(&#39;Demo use case test&#39;, () async {
+    final mockedCallback = MockCallback();
+    final usecase = DemoUseCase(fetchDataCallback: mockedCallback);
+    usecase.fetchData();
+    verify(mockedCallback(any)).called(1);
+});
+</code></pre>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
   </google-codelab>
-          <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
-          <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
-          <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
-          <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
-          <script src="//support.google.com/inapp/api.js"></script>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
 </body>
 </html>
