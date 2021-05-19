@@ -1,0 +1,30 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2021-05-18T18:38:42-04:00",
+  "id": "clean_packages_plugins",
+  "duration": 10,
+  "title": "Clean Framework and External Dependency",
+  "authors": "Alireza Khakpour",
+  "summary": "Clean - External Dependency",
+  "source": "clean_packages_plugins.md",
+  "theme": "",
+  "status": [
+    "active"
+  ],
+  "category": [
+    "Flutter",
+    "Mobile Development",
+    "Mobile App"
+  ],
+  "tags": [
+    "package",
+    "plugin",
+    "test",
+    "ui",
+    "widget test"
+  ],
+  "url": "clean_packages_plugins"
+}
