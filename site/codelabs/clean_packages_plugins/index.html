@@ -1,0 +1,143 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Clean Freamework and External Dependency</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+    p.ex1 {
+  border: 1px solid rgba(128, 128, 128, 0.542); 
+  padding-top: 30px;
+  padding-right: 30px;
+  padding-bottom: 30px;
+  padding-left: 30px;
+}
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="clean_packages_plugins"
+                  title="Clean Freamework and External Dependency"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Introduction" duration="0">
+        <p class="image-container"><img alt="Pub.dev" src="img/1344996d57589a4b.png"></p>
+<ul>
+<li><strong>Package</strong> : A package is a piece of software that adds capabilities to the Flutter app.  <ul>
+<li><strong>Dart packages</strong> : General packages written in Dart, contain Flutter specific functionality and thus have a dependency on the Flutter framework.</li>
+<li><strong>Plugin packages</strong> : A specialized Dart package that contains an API written in Dart code combined with one or more platform-specific implementations.</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="How select a package" duration="0">
+        
+        <p>To get Dart packages, you can use the pub.dev site, or load packages from the local file system or elsewhere, such as Git repositories. Between different options for a specific package, we should select the one that confirms below list.</p>
+        <ul>
+<li>High overall package score</li>
+<li>Prefer permissive license</li>
+<li>Verified publisher</li>
+<li>High quality dependencies</li>
+<li>Reputation of publisher</li>
+<li>GitHub version tag matches the current version from pub.dev</li>
+<li>Feature completeness—and not marked as incomplete</li>
+<li>General usability when it comes to the overview, docs, sample/example code, and API quality</li>
+<li>Good runtime behavior in terms of CPU and memory usage</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="How add a package to clean framework" duration="0">
+        <p class="image-container"><img alt="Presentation Layer" src="img/d8736ffa14eb7194.png"></p>
+        
+        <p class="ex1">All packages should be in the <code>dependency</code> directory.  usually, the usage of package functionality is in Domain Layer within business logic, imagine for any reason in future we want to swap the package for something different. If we used it directly inside the Usecase we would need to change a lot of code. But by hiding 3rd party library in a class we control, there won't much code to change. So we should wrap package functionality with a class that is inherited from <code>ExternalDependency</code>. </p>
+<pre ><code language="language-dart" class="language-dart">
+import 'package:clean_framework/clean_framework.dart';
+import 'package:permission_handler/permission_handler.dart';
+
+class PermissionHandlerPlugin extends ExternalDependency {
+    
+    Future&lt;bool&gt; isGrantedAccessCamera() async {
+      
+      var status = await Permission.camera.status;
+      
+      if (status.isGranted) {
+        return true;
+      } else {
+        var reqStatus = await Permission.camera.request();
+        return reqStatus.isGranted;
+      }
+    }
+
+}
+
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="How to test package" duration="0">
+        <ul>
+
+ <li>In order to test the package functionality, we can check package repository, for permission handler packge we can find test file <a href="https://github.com/Baseflow/flutter-permission-handler/blob/master/permission_handler/test/permission_handler_test.dart">here</a>.
+ <li>To test the usage of wraped class in app logic, 
+ 
+
+
+
+
+<ol type="1">
+  <li>Create a <code>Mock</code> class to cover package class</li>
+<pre><code language="language-dart" class="language-dart">    class MockPermissionHandlerPlugin extends Mock implements PermissionHandlerPlugin {}
+</code></pre>
+
+<li>Override the method to return a mock value
+
+<pre><code language="language-dart" class="language-dart">class MockPermissionHandlerPlugin extends Mock implements PermissionHandlerPlugin {
+  
+  @override
+  Future&lt;bool&gt; isGrantedAccessCamera() async {
+    return true;
+  }
+
+}
+</code></pre>
+
+<li>Initialize mock package and call the method on the use case of the plugin. we expect the method to run properly
+
+</li>
+</ol>
+</ul>
+
+      </google-codelab-step>
+    
+     
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
