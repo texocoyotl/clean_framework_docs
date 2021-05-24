@@ -99,11 +99,11 @@ void main() {
 
     test(&#39;Test #1 description&#39, () {
 
-      //TODO 1st step: provide functionality
+      //1st step: Setup - Arrange
 
-      //TODO 2nd step: get the result of step 1
+      //2nd step: Action - Act
 
-      //TODO 3rd step: verify the intended behavior
+      //3rd step: Result - Assert
 
     });
 
@@ -119,7 +119,28 @@ void main() {
       </google-codelab-step>
     
       <google-codelab-step label="Sample Unit Test" duration="0">
+       
+        <p> Let test a unit that return Computes the nth Fibonacci number</p>
+
+
+        <ol type="1">
+        <li>Setup - initialize <code>FibonacciHelper</code> class</li>
         
+        <pre><code language="language-dart" class="language-dart">   final fiboHelper = FibonacciHelper('7');</code></pre>
+        
+        <li>Action - Call  <code>getFibonacciResult()</code> method to receive result</li>
+        
+        <pre><code language="language-dart" class="language-dart">   var result = fiboHelper.getFibonacciResult();</code></pre>
+
+        
+        <li>Result - matcher should verify the resulting base on user data entry.   <pre>
+          <code language="language-dart" class="language-dart">expect(result.returnValue, 13);
+        </code></pre>
+        </li>
+        </ol>
+        <p> You can see the test result below.</p>
+<iframe src="https://dartpad.dev/embed-flutter.html?id=82e06fb92cacd9e1c1275b9a7caeb297&theme=dark&null_safety=true&split=100&run=true"
+style="width: 750px; height: 500px;"></iframe>
 
       </google-codelab-step>
     
