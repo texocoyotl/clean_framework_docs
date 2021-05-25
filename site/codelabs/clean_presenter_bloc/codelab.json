@@ -3,7 +3,7 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
-  "updated": "2021-05-19T17:37:03-04:00",
+  "updated": "2021-05-25T00:07:29-04:00",
   "id": "clean_presenter_bloc",
   "duration": 0,
   "title": "Clean - The Presenter and BLoC",
@@ -15,7 +15,7 @@
     "active"
   ],
   "category": [
-    "mobile development with flutter"
+    "flutter"
   ],
   "tags": [
     "clean architecture",

@@ -70,7 +70,7 @@
     class ExamplePresenter extends Presenter&lt;ExampleBloc, ExampleViewModel, ExampleScreen&gt;  {     
                           
           @override
-          Stream&lt;DepositCheckCardViewModel&gt; getViewModelStream (ExampleBloc bloc) {...
+          Stream&lt;ExampleViewModel&gt; getViewModelStream (ExampleBloc bloc) {...
 
           @override
           Widget buildLoadingScreen(BuildContext context) {...
@@ -92,7 +92,7 @@
 
 <pre><code language="language-dart" class="language-dart">
       @override
-      DepositCheckCardScreen buildScreen(BuildContext   context,
+      ExampleScreen buildScreen(BuildContext   context,
           ExampleBloc bloc, ExampleViewModel  viewModel) {
         return ExampleScreen(
           viewModel: viewModel,
