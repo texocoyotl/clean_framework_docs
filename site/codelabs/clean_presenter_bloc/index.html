@@ -1,10 +1,12 @@
+
 <!doctype html>
+
 <html>
 <head>
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
   <meta name="theme-color" content="#4F7DC9">
   <meta charset="UTF-8">
-  <title>Clean Framework - Presenter and Bloc</title>
+  <title>Clean - The Presenter and BLoC</title>
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
   <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
@@ -15,33 +17,126 @@
     .error {
       color: red;
     }
-    .center {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      width: 50%;
-    }
-    .FlowChartColored{
-      width: 100px;
-      height: 100px;
-    }
   </style>
 </head>
 <body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
   <google-codelab codelab-gaid=""
                   id="clean_presenter_bloc"
-                  title="Clean Framework - Presenter and Bloc"
-                  environment="web">
+                  title="Clean - The Presenter and BLoC"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Introduction" duration="0">
+        <p class="image-container"><img alt="Presentation - Bloc" src="img/9bbc07d618e703f4.png"></p>
+<ul>
+<li><strong>Presenter</strong>: Creates Screen based on <code>BuildContext</code>, <code>BLoC</code>, and <code>ViewModel</code>, and supports screen action.</li>
+<li><strong>BLoC</strong>: The Bloc component, manage state across the app and routes data/state to other parts of the Framework.</li>
+</ul>
 
-      <!--  Clean Architecture - Screen - Bloc - Presenter -->
-      <google-codelab-step label="The Presenter and Bloc" duration="5">
+
       </google-codelab-step>
+    
+      <google-codelab-step label="Presenter" duration="0">
+        <p><strong>Presenter</strong> extents <code>Presenter&lt; Bloc, ViewModel, Screen&gt;</code> to create the Screen, and also manages all user actions on screen.</p>
+<pre><code language="language-dart" class="language-dart">    class ExamplePresenter extends Presenter&lt;ExampleBloc, ExampleViewModel, ExampleScreen&gt;  {     
+      
+        @override
+        Stream&lt;ExampleViewModel&gt; getViewModelStream (ExampleBloc bloc) {...
 
+        @override
+        Widget buildLoadingScreen(BuildContext context) {...
+
+        @override
+        Widget buildErrorScreen(BuildContext context, Object? error) {...
+
+        @override
+        ExampleScreen buildScreen(BuildContext context, ExampleBloc  bloc, ExampleViewModel viewModel) {...    
+  
+    }
+</code></pre>
+<ul>
+<li><code>getViewModelStream</code> method provide <code>ViewModel</code> by listening to <code>BLoc</code> listener.</li>
+<li><code>buildLoadingScreen</code> method return a <code>Widget</code> to create the loading screen.</li>
+<li><code>buildErrorScreen</code> method return a <code>Widget</code> to create the error screen.</li>
+<li><code>buildScreen</code> method return a <code>Screen</code> to create the UI by passing the associated <code>ViewModel</code> and the action functions.</li>
+</ul>
+<pre><code language="language-dart" class="language-dart">      @override
+      ExampleScreen buildScreen(BuildContext   context,
+          ExampleBloc bloc, ExampleViewModel  viewModel) {
+        return ExampleScreen(
+          viewModel: viewModel,
+          pressenterActions: ExamplePressenterActions(),
+        );
+      }
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="BLoC" duration="0">
+
+        <table style="width:100%">
+             <tr>
+        
+            <td><img alt="Presentation - Bloc" title="Copy from Sam Parks presentation" src="img/60502c69e98fa5db.png"></td>
+            <td><img alt="Presentation - Bloc" title="Copy from Sam Parks presentation" src="img/30f37890e9a8f48b.png"></td>
+          </tr>
+        </table>
+        <p class="image-container"></p>
+<ul>
+<li>Business Logic Component <code>BLoC</code>, is like an application traffic manager that connects <code>Usecase</code> and <code>Screen</code> via pipes</li>
+  <pre><code>class ExampleBloc extends Bloc {
+  
+  ExampleUseCase? _exampleUseCase;
+  final exampleViewModelPipe = Pipe&lt;ExampleViewModel&gt;();
+  final exampleEventPipe = Pipe&lt;ExampleEvent&gt;(canSendDuplicateData: true);
+  
+  @override
+  void dispose() {
+  	exampleViewModelPipe.dispose();
+  	exampleEventPipe.dispose();
+  }
+  
+  ExampleBloc({ExampleUseCase? exampleUseCase}) {
+  	_exampleUseCase = exampleUseCase ?? ExampleUseCase(exampleEventPipe.send);
+  	exampleViewModelPipe.whenListenedDo(() =&gt; _exampleUseCase!.execute());
+  	exampleEventPipe.receive.listen(exampleEventPipeHandler);
+  }
+  
+  void exampleEventPipeHandler(ExampleEvent event) {}
+}
+</code></pre>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Relationship" duration="0">
+        <p><img alt="Presentation - Bloc" src="img/e7b0b477a701c0cb.png"> Presenter and Bloc are connecting the domain layer and presentation layer, to serve Screen data/state with logic that process in Usecase.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Resposibility" duration="0">
+        <p class="image-container"><img alt="Presentation - Bloc" src="img/1d12ba2c37e35c89.png"></p>
+<ul>
+  <li>Presenter access to the stream of <code>ViewModel</code> through listening to <code>ViewModel</code> pipes and provide that to screen, or send screen event to domain layer through calling event pipe provided by <code>BloC</code>.</li>
+
+<li><Code>BloC</Code>  Listen to events/data from presenter via pipes and invoke the use case by specific business logic. Receive updated <Code>ViewModel</Code> from <Code>UseCase</Code> via callback, and send the <Code>ViewModel</Code> to the presenter via the ViewModel pipe.</li>
+</ul>
+
+
+      </google-codelab-step>
+    
   </google-codelab>
-          <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
-          <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
-          <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
-          <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
-          <script src="//support.google.com/inapp/api.js"></script>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
 </body>
 </html>
