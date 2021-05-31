@@ -2,6 +2,7 @@
 
 // Gulp
 const gulp = require('gulp');
+const shell = require('gulp-shell')
 
 // Gulp plugins
 const babel = require('gulp-babel');
@@ -105,6 +106,10 @@ gulp.task('clean:dist', (callback) => {
 gulp.task('clean:js', (callback) => {
   return del('app/js/bundle')
 });
+
+gulp.task('firebase', shell.task([
+    'firebase deploy'
+]))
 
 // clean removes all built files
 gulp.task('clean', gulp.parallel(
