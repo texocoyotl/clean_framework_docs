@@ -2,27 +2,25 @@
   "environment": "web",
   "format": "html",
   "prefix": "https://storage.googleapis.com",
-  "updated": "2020-04-26T00:00:00-00:00",
+  "mainga": "UA-49880327-14",
+  "updated": "2021-05-24T00:17:47-04:00",
   "id": "testing_unit_tests",
-  "duration": 5,
+  "duration": 0,
   "title": "Testing - Unit Tests",
-  "authors": "Eric Narvaez",
-  "summary": "Testing - Unit Tests",
+  "authors": "Alireza Khakpour",
+  "summary": "Overview - Unit Testing",
   "source": "testing_unit_tests.md",
   "theme": "",
   "status": [
-    "published"
+    "active"
   ],
   "category": [
-    "Flutter",
-    "Mobile Development",
-    "Mobile App"
+    "flutter"
   ],
   "tags": [
     "Testing",
     "Mobile Development",
     "Mobile App"
   ],
-  "feedback": "",
-  "url": ""
+  "url": "testing_unit_tests"
 }

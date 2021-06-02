@@ -1,4 +1,6 @@
+
 <!doctype html>
+
 <html>
 <head>
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
@@ -15,34 +17,261 @@
     .error {
       color: red;
     }
-    .center {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      width: 50%;
-    }
-    .FlowChartColored{
-      width: 100px;
-      height: 100px;
-    }
   </style>
 </head>
 <body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
   <google-codelab codelab-gaid=""
                   id="testing_unit_tests"
                   title="Testing - Unit Tests"
-                  environment="web">
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Introduction" duration="0">
+        <p class="image-container"><img alt="Testing" title="Testing" src="img/laptop.png"></p>
+<p>By writing tests we can ensure that the app continues to work as we add more features or change existing functionality.</p>
+<ul>
+<li><strong>Unit Test</strong>: Unit tests are verifying the behavior of a single function, method, or class. The <a href="https://pub.dev/packages/test" target="_blank">test</a> package provides the core framework for writing unit tests.</li>
+<li><strong>Widget Test</strong>: Because of nature of Flutter that all part of UI is Widget and written in Dart code. We can write UI component test like Unit tests in Flutter, and the <a href="https://api.flutter.dev/flutter/flutter_test/flutter_test-library.html" target="_blank">flutter_test</a> package provides utilities for testing widgets.</li>
+</ul>
 
-      <!--  Testing - Unit Tests -->
-      <google-codelab-step label="Testing - Unit Tests" duration="5">
-        <li>The <code>Screen</code> matches the view model to the the UI elements</li>
+
       </google-codelab-step>
+    
+      <google-codelab-step label="Unit Test" duration="0">
+        <p>Writing Unit Tests helps you to confidently build new features, minimize bugs and refactor existing code. It also forces you to write better, more maintainable code that can be easily tested. with Unit test we following two important purposes:</p>
+<ul>
+<li>Making sure intended behavior is satisfied, also helps if someone else comes to our code easily understands the purpose of the unit.</li>
+<li>Making sure bad input/state does not cause undefined behavior we do not expect in the program.</li>
+</ul>
+<aside class="special">
+<p><strong>Characteristics of a good unit test</strong></p>
+<ul>
+<li><strong>Fast</strong>: Unit tests should take very little time to run. Milliseconds.</li>
+<li><strong>Isolated</strong>: Unit tests are standalone, can be run in isolation, and have no dependencies on any outside factors such as a file system or database.</li>
+<li><strong>Repeatable</strong>: Running a unit test should be consistent with its results, that is, it always returns the same result if you do not change anything in between runs.</li>
+<li><strong>Self-Checking</strong>: The test should be able to automatically detect if it passed or failed without any human interaction.</li>
+<li><strong>Timely</strong>: A unit test should not take a disproportionately long time to write compared to the code being tested. <a href="https://docs.microsoft.com/en-us/dotnet/core/testing/unit-testing-best-practices" target="_blank">more info</a></li>
+</ul>
+</aside>
 
+      </google-codelab-step>
+    
+      <google-codelab-step label="Mocking" duration="0">
+        <p><img alt="https://www.clariontech.com" title="source https://www.clariontech.com" src="img/class_in_unit_test.png"></p>
+        <p><strong>Mocking</strong> is a way of simulating parts of your app that are outside the scope of the test so that they behave in specific way. Sometimes, unit tests might depend on classes that fetch data from web services or databases. This is inconvenient for a few reasons:</p>
+<ul>
+<li>Calling live services or databases slows down test execution.</li>
+<li>A passing test might start failing if a service or database returns unexpected results.</li>
+<li>It is difficult to test all possible success and failure scenarios.</li>
+</ul>
+<p>To prevent this obstacle we can mock dependencies by creating an alternative implementation of a class or make use of the <a href="https://pub.dev/packages/mockito" target="_blank">Mockito</a> package as a shortcut.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Test Anatomy" duration="0">
+        <ul>
+<li><code>setUp</code> and <code>setUpAll</code> method, Registers a function to be run before tests. the difference is <code>setUp</code> method will be called the function before each test is run. but <code>setUpAll</code> calls the Registered function once before all tests. we should prefer <code>setUp</code>, and only use <code>setUpAll</code> if the callback is slow.</li>
+<li><code>tearDown</code> and <code>tearDownAll</code> method, Registers a function to be run after tests. the difference is <code>tearDown</code> method will be called the function after each test is run. but <code>setUpAll</code> calls the Registered function once after all tests.</li>
+</ul>
+<p class="image-container"><img alt="setUp-tearDown" src="img/test_process.png"></p>
+<ul>
+<li>Tests can be grouped together using the <code>group()</code> function. Each group&#39;s description is added to the beginning of its test&#39;s descriptions.</li>
+<li><code>test()</code> creates a new test case with the given description and body. test body should call the specific functionality of the unit that needs to test and then assert the intended behavior of the unit.</li>
+</ul>
+<aside class="special">
+<p>It&#39;s a good practice to have only one <code>expect</code> per test, It makes a little more boilerplate for a common setup. but in a test failure, the test case gives you very meaningful information.</p>
+</aside>
+<pre><code language="language-dart" class="language-dart">import &#39;package:test/test.dart&#39;;
+
+void main() {
+
+  setUp(() {
+    //TODO: Registers a function to be run before tests.
+  });
+
+  tearDown(() {
+    //TODO: Registers a function to be run after tests.
+  });
+
+  group(&#39;A group of test description&#39;, () {
+
+    test(&#39;Test #1 description&#39, () {
+
+      //1st step: Setup - Arrange
+
+      //2nd step: Action - Act
+
+      //3rd step: Result - Assert
+
+    });
+
+    test(&#39;Test #2 description&#39;, () {
+
+    });
+    
+  });
+}
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Sample Unit Test" duration="0">
+       
+        <p> Let test a unit that return Computes the nth Fibonacci number</p>
+
+
+        <ol type="1">
+        <li>Setup - initialize <code>FibonacciHelper</code> class</li>
+        
+        <pre><code language="language-dart" class="language-dart">   final fiboHelper = FibonacciHelper('7');</code></pre>
+        
+        <li>Action - Call  <code>getFibonacciResult()</code> method to receive result</li>
+        
+        <pre><code language="language-dart" class="language-dart">   var result = fiboHelper.getFibonacciResult();</code></pre>
+
+        
+        <li>Result - matcher should verify the resulting base on user data entry.   <pre>
+          <code language="language-dart" class="language-dart">expect(result.returnValue, 13);
+        </code></pre>
+        </li>
+        </ol>
+        <p> You can see the test result below.</p>
+<iframe src="https://dartpad.dev/embed-flutter.html?id=82e06fb92cacd9e1c1275b9a7caeb297&theme=dark&null_safety=true&split=100&run=true"
+style="width: 750px; height: 500px;"></iframe>
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Widget Test" duration="0">
+        <p>A widget test (UI component test) tests a single widget. Testing a widget involves multiple classes and requires a test environment that provides the appropriate widget lifecycle context, Widget tests following two important purposes:</p>
+<ul>
+<li>How application handles user actions such as tap button, input data.</li>
+<li>Whether the visual elements (buttons, text fields, images, and so on) are displayed correctly and work as intended.</li>
+</ul>
+<p>The body of the testWidgets:</p>
+<pre><code  language="language-dart" class="language-dart">
+    testWidgets(&#39;Widget test description&#39;,(tester) async {
+      
+      // 1st step: Create the test Widget.
+
+      // 2nd step: Build the widget by pumpWidget through the tester.
+
+      // 3rd step: Create the Finders.
+
+      // 4th step: Use matchers to verify the appearance of the widget in the widget tree.
+      
+    });
+
+</code></pre>
+
+<ul>
+  <ol type="1">
+<li>Create a widget to test  <pre><code  language="language-dart" class="language-dart">MaterialApp myWidget = 
+  MaterialApp(
+    home: ExampleScreen(
+      viewModel: exampleViewModel,
+      pressenterAction: mockPressenterAction,
+    ),
+);
+</code></pre>
+</li>
+<li>Build the test widget inside the test environment by using the <code>pumpWidget()</code> method.</li>
+<ul>
+<li>The <code>pumpWidget</code> method builds and renders the provided widget.</li>
+<li><code>tester.pump(Duration duration)</code> method provides additional ways to rebuild the same widget. This is useful if you&#39;re working with a StatefulWidget or animations. For example, tapping a button.</li>
+<li><code>tester.pumpAndSettle()</code> Repeatedly calls pump() with the given duration until there are no longer any frames scheduled.</li>
+</ul>
+<li>Use the Finder to locate widgets in a test environment</li>
+
+<p>Most common finder method:</p>
+<ul>
+  <li><code>find.byKey()</code> : Finds widgets by searching for one with a particular [Key].</li>
+  <li><code>find.byType()</code> : Finds widgets by searching for widgets with a particular type.</li>
+  <li><code>find.text()</code>: Finds [Text] and [EditableText] widgets containing string equal to the text argument.</li>
+</ul>
+
+
+<li>Verify the widget using a Matcher</li>
+
+<p>Finally, verify the objects that appear on the screen using the Matcher constants. Ensure that the widgets appear on screen exactly one time. For this purpose, use the <code>findsOneWidget</code> Matcher.</p>
+<p>Additional Matchers</p>
+<ul>
+<li><code>findsNothing</code> Verifies that no widgets are found.</li>
+<li><code>findsWidgets</code> Verifies that one or more widgets are found.</li>
+<li><code>findsNWidgets</code> Verifies that a specific number of widgets are found.</li>
+<li><code>matchesGoldenFile</code> Verifies that a widget&#39;s rendering matches a particular bitmap image (&#34;golden file&#34; testing).</li>
+</ul>
+</ol>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Sample Widget Test" duration="0">
+             
+
+        <p class="image-container"><img  title="Example Screen" alt="Presentation Layer" src="img/screenview.png
+          "></p>
+
+
+          <p> First step of screen test is to verify appearance of all objects on the screen</p>
+
+
+<ol type="1">
+<li>Create a <code>MaterialApp</code> object for testing</li>
+
+<pre><code language="language-dart" class="language-dart">    MaterialApp myWidget = MaterialApp(
+      home: ExampleScreen(
+          viewModel: exampleViewModel,
+          pressenterAction: mockPressenterAction),
+    );
+</code></pre>
+<li><code>pumpWidget</code> calls runApp, and also triggers a frame to paint the app.  <pre><code language="language-dart" class="language-dart">await tester.pumpWidget(myWidget);
+</code></pre>
+</li>
+<li>Create the Finders 
+  <ul>
+    <li><code>find.byKey()</code> : Finds widgets by searching for one with a particular [Key].</li>
+    <li><code>find.byType()</code> : Finds widgets by searching for widgets with a particular type.</li>
+    <li><code>find.text()</code> : Finds [Text] and [EditableText] widgets containing string equal to the text argument.<br></li>
+    </ul>
+  <pre>
+  
+  <code language="language-dart" class="language-dart">final titleFinder = find.text('Pay Card Balance');
+  final dividerFinder = find.byType(Divider);
+  final descFinder = find.text('No Payment Due');
+  final currentBalanceFinder =  find.text('Card Balance: \$${exampleViewModel.currentBalance}');
+  final buttonFinder =  find.byKey(Key('Pay-More-Button'));
+
+</code></pre>
+</li>
+
+<li>Use the <code>findsOneWidget</code> matcher to verify that the Text widgets appear exactly once in the widget tree.  <pre>
+  <code language="language-dart" class="language-dart">expect(titleFinder, findsOneWidget);
+  expect(dividerFinder, findsOneWidget);
+  expect(descFinder, findsOneWidget);
+  expect(currentBalanceFinder, findsOneWidget);
+  expect(buttonFinder, findsOneWidget);
+</code></pre>
+</li>
+</ol>
+
+<p> You can see the test result below.</p>
+<iframe src="https://dartpad.dev/embed-flutter.html?id=8aa0515a3d513b9720dd9a399c4c79a3&theme=dark"
+style="width: 750px; height: 500px;"></iframe>
+
+
+      </google-codelab-step>
+    
   </google-codelab>
-          <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
-          <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
-          <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
-          <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
-          <script src="//support.google.com/inapp/api.js"></script>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
 </body>
 </html>

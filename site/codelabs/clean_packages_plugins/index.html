@@ -35,7 +35,7 @@
                   feedback-link="">
     
       <google-codelab-step label="Introduction" duration="0">
-        <p class="image-container"><img alt="Pub.dev" src="img/1344996d57589a4b.png"></p>
+        <p class="image-container"><img alt="Pub.dev" src="img/pub_dev_logo.png"></p>
 <ul>
 <li><strong>Package</strong> : A package is a piece of software that adds capabilities to the Flutter app.  <ul>
 <li><strong>Dart packages</strong> : General packages written in Dart, contain Flutter specific functionality and thus have a dependency on the Flutter framework.</li>
@@ -66,7 +66,7 @@
       </google-codelab-step>
     
       <google-codelab-step label="How add a package to clean framework" duration="0">
-        <p class="image-container"><img alt="Presentation Layer" src="img/d8736ffa14eb7194.png"></p>
+        <p class="image-container"><img alt="Presentation Layer" src="img/dependency_directory.png"></p>
         
         <p class="ex1">All packages should be in the <code>dependency</code> directory.  usually, the usage of package functionality is in Domain Layer within business logic, imagine for any reason in future we want to swap the package for something different. If we used it directly inside the Usecase we would need to change a lot of code. But by hiding 3rd party library in a class we control, there won't much code to change. So we should wrap package functionality with a class that is inherited from <code>ExternalDependency</code>. </p>
 <pre ><code language="language-dart" class="language-dart">
