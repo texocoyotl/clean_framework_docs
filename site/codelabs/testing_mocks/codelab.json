@@ -3,12 +3,12 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "updated": "2020-04-26T00:00:00-00:00",
-  "id": "testing_mocks",
+  "id": "clean_repository",
   "duration": 5,
-  "title": "Testing - Mocks",
+  "title": "Clean - The Repository",
   "authors": "Eric Narvaez",
   "summary": "Clean - The Repository",
-  "source": "testing_mocks.md",
+  "source": "clean_repository.md",
   "theme": "",
   "status": [
     "published"
@@ -19,7 +19,8 @@
     "Mobile App"
   ],
   "tags": [
-    "Testing",
+    "Clean",
+    "Repository",
     "Mobile Development",
     "Mobile App"
   ],

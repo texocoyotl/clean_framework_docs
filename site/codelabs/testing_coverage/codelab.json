@@ -3,12 +3,12 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "updated": "2020-04-26T00:00:00-00:00",
-  "id": "testing_coverage",
+  "id": "clean_bloc_and_repository",
   "duration": 5,
-  "title": "Testing - Coverage",
+  "title": "Clean - The Bloc and Repository",
   "authors": "Eric Narvaez",
-  "summary": "Testing - Coverage",
-  "source": "testing_coverage.md",
+  "summary": "Clean - The Bloc and Repository",
+  "source": "clean_bloc_and_repository.md",
   "theme": "",
   "status": [
     "published"
@@ -19,7 +19,10 @@
     "Mobile App"
   ],
   "tags": [
-    "Testing",
+    "Clean",
+    "Bloc",
+    "Repository",
+    "Repo",
     "Mobile Development",
     "Mobile App"
   ],
