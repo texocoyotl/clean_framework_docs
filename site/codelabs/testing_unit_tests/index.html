@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
   <meta name="theme-color" content="#4F7DC9">
   <meta charset="UTF-8">
-  <title>Overview - Unit Testing</title>
+  <title>Testing - Unit Tests</title>
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
   <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
@@ -22,13 +22,13 @@
 <body>
   <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
   <google-codelab codelab-gaid=""
-                  id="overview_unit_test"
-                  title="Overview - Unit Testing"
+                  id="testing_unit_tests"
+                  title="Testing - Unit Tests"
                   environment="web"
                   feedback-link="">
     
       <google-codelab-step label="Introduction" duration="0">
-        <p class="image-container"><img alt="Testing" title="Testing" src="img/d1a58acadbd7e104.png"></p>
+        <p class="image-container"><img alt="Testing" title="Testing" src="img/laptop.png"></p>
 <p>By writing tests we can ensure that the app continues to work as we add more features or change existing functionality.</p>
 <ul>
 <li><strong>Unit Test</strong>: Unit tests are verifying the behavior of a single function, method, or class. The <a href="https://pub.dev/packages/test" target="_blank">test</a> package provides the core framework for writing unit tests.</li>
@@ -58,7 +58,7 @@
       </google-codelab-step>
     
       <google-codelab-step label="Mocking" duration="0">
-        <p><img alt="https://www.clariontech.com" title="source https://www.clariontech.com" src="img/dd57afd408a08021.png"></p>
+        <p><img alt="https://www.clariontech.com" title="source https://www.clariontech.com" src="img/class_in_unit_test.png"></p>
         <p><strong>Mocking</strong> is a way of simulating parts of your app that are outside the scope of the test so that they behave in specific way. Sometimes, unit tests might depend on classes that fetch data from web services or databases. This is inconvenient for a few reasons:</p>
 <ul>
 <li>Calling live services or databases slows down test execution.</li>
@@ -75,7 +75,7 @@
 <li><code>setUp</code> and <code>setUpAll</code> method, Registers a function to be run before tests. the difference is <code>setUp</code> method will be called the function before each test is run. but <code>setUpAll</code> calls the Registered function once before all tests. we should prefer <code>setUp</code>, and only use <code>setUpAll</code> if the callback is slow.</li>
 <li><code>tearDown</code> and <code>tearDownAll</code> method, Registers a function to be run after tests. the difference is <code>tearDown</code> method will be called the function after each test is run. but <code>setUpAll</code> calls the Registered function once after all tests.</li>
 </ul>
-<p class="image-container"><img alt="setUp-tearDown" src="img/c25e696acfb62db.png"></p>
+<p class="image-container"><img alt="setUp-tearDown" src="img/test_process.png"></p>
 <ul>
 <li>Tests can be grouped together using the <code>group()</code> function. Each group&#39;s description is added to the beginning of its test&#39;s descriptions.</li>
 <li><code>test()</code> creates a new test case with the given description and body. test body should call the specific functionality of the unit that needs to test and then assert the intended behavior of the unit.</li>
