@@ -1,48 +1,244 @@
 <!doctype html>
 <html>
+
 <head>
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
   <meta name="theme-color" content="#4F7DC9">
   <meta charset="UTF-8">
   <title>Clean - The Repository</title>
-  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet"
+    href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
   <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
   <style>
     .success {
       color: #1e8e3e;
     }
+
     .error {
       color: red;
     }
+
     .center {
       display: block;
       margin-left: auto;
       margin-right: auto;
       width: 50%;
     }
-    .FlowChartColored{
+
+    .FlowChartColored {
       width: 100px;
       height: 100px;
     }
   </style>
 </head>
-<body>
-  <google-codelab codelab-gaid=""
-                  id="clean_repository"
-                  title="Clean - The Repository"
-                  environment="web">
 
-      <!--  Clean - The Repository -->
-      <google-codelab-step label="Clean - The Repository" duration="5">
-        <li>The <code>Screen</code> matches the view model to the the UI elements</li>
-      </google-codelab-step>
+<body>
+  <google-codelab codelab-gaid="" id="clean_repository" title="The Repository" environment="web">
+
+    <!--  Clean - The Repository -->
+    <google-codelab-step label="Repository" duration="5">
+      <h3>Responsibility</h3>
+      <ul>
+        <li>Maps Scope to Entities</li>
+        <li>Manage Scope (Create, update and retrieve) </li>
+        <li>Execute Service Adapter Functionality </li>
+      </ul>
+
+      <pre><code lang="dart">
+        class RepositoryScope {
+          Function(dynamic) subscription;
+          RepositoryScope(this.subscription);
+        }
+
+        class Repository {
+          Map<RepositoryScope, Entity> scopes = {};
+
+          RepositoryScope create<E extends Entity>(
+              E entity, Function(dynamic) subscription,
+              {bool deleteIfExists = false}) {
+            final existingScope = scopes.keys.firstWhere(
+                (element) => scopes[element].runtimeType == entity.runtimeType,
+                orElse: () => null);
+
+            if (existingScope != null && !deleteIfExists) {
+              existingScope.subscription = subscription;
+              return existingScope;
+            } else if (existingScope != null && deleteIfExists) {
+              scopes.remove(existingScope);
+            }
+
+            RepositoryScope scope = RepositoryScope(subscription);
+            scopes[scope] = entity;
+            return scope;
+          }
+
+          void update<E extends Entity>(RepositoryScope scope, E entity) {
+            if (scopes[scope] == null)
+              throw StateError('Entity not found for that scope.');
+            scopes[scope] = entity;
+          }
+
+          E get<E extends Entity>(RepositoryScope scope) {
+            if (scopes[scope] == null)
+              throw StateError('Entity not found for that scope.');
+            return scopes[scope];
+          }
+
+          Future<void> runServiceAdapter(
+              RepositoryScope scope, ServiceAdapter adapter) async {
+            scopes[scope] = await adapter.query(scopes[scope]);
+            scope.subscription(scopes[scope]);
+          }
+
+          RepositoryScope containsScope<E extends Entity>() {
+            final existingScope = scopes.keys.firstWhere(
+                (element) => scopes[element].runtimeType == E,
+                orElse: () => null);
+            return (existingScope);
+          }
+        }
+
+      </code></pre>
+
+    </google-codelab-step>
+    <google-codelab-step label="Manage Scope" duration="5">
+      <h3>Create Scope</h3>
+      <pre><code lang="dart">
+  //try to find the scope that has your Entity first
+  _scope = _repository.containsScope<MyEntity>();
+    if (_scope == null) {
+      //if it is not exists create it
+      final MyEntity = MyEntity();
+      _scope = _repository.create<MyEntity>(MyEntity, notifySubscribers);
+    } else {
+      //if it exists update the subscriptions
+      _scope.subscription = notifySubscribers;
+    }
+      </code></pre>
+
+      <strong>*notifySubscribers is your subscription method that will be called each time your entity was updated to
+        let any
+        code that is interested in that entity know that it was updated. it is a local function within your usecase and
+        you can name it whatever you like</strong>
+
+      <h3>Update Scope</h3>
+      <pre><code lang="dart">
+        //get your entity first
+        final entity = _repository.get<PayeeListEntity>(_scope);
+
+        //make the changes to your entity
+        final MyEntityWithUpdate = entity.merge(entityAttribute: <your_update>);
+
+        //update the scope with the new entity
+        _repository.update<PayeeListEntity>(_scope, MyEntityWithUpdate);
+
+        //notify your subscribers that the entity was updated
+        notifySubscribers(MyEntityWithUpdate);
+      </code></pre>
+
+
+    </google-codelab-step>
+    <google-codelab-step label="Execute Service Adapter" duration="5">
+      <p>Usually after find/create your scope that has your entity, you execute the service adapter to call the service
+        and return your service model to be mapped later to you Entity</p>
+      <pre><code lang="dart">
+
+        await _repository.runServiceAdapter(_scope, MyServiceAdapter)
+      </code></pre>
+
+    </google-codelab-step>
+
+    <google-codelab-step label="Mapping Entity to ViewModel" duration="5">
+
+      <p>This is your subscription method that will be executed each time, so you can setup logs, error handlers ...etc.
+      </p>
+      <pre><code lang="dart">
+        void notifySubscribers(MyEntity entity) {
+
+          _viewModelCallBack(buildViewModelFromService(entity));
+        }
+      </code></pre>
+
+      <p>Map your viewModel as you see fit for your view, using the entity</p>
+
+      <pre><code lang="dart">
+        MyViewModel buildViewModelFromService(MyEntity entity) {
+          if (entity == null) {
+            return MyViewModel(
+              a: entity.a,
+              b: entity.b,
+              ....
+            );
+          }
+      </code></pre>
+
+    </google-codelab-step>
+
+    <google-codelab-step label="Testing" duration="5">
+      <p>Usually you create a general mock for your repo that will be used to mock all its interactions when it is being
+        use in the use case</p>
+
+
+      <pre><code lang="dart">
+        class MockRepositoryScope extends Fake implements RepositoryScope {
+          Function(dynamic) subscription;
+        }
+
+        class MockRepository extends Mock implements Repository {
+          static var _entity;
+          static var _scope;
+
+          MockRepository._internal();
+
+          factory MockRepository() {
+            final mockRepository = MockRepository._internal();
+
+            when(mockRepository.create(any, any)).thenAnswer((invocation) {
+              _scope = MockRepositoryScope();
+              return _scope;
+            });
+            when(mockRepository.containsScope()).thenAnswer((invocation) => _scope);
+            when(mockRepository.runServiceAdapter(any, any))
+                .thenAnswer((invocation) => Future.value(_entity));
+            when(mockRepository.get(any)).thenAnswer((invocation) => _entity);
+            return mockRepository;
+          }
+
+          void set mockEntity(value) => _entity = value;
+          void set scope(value) => _scope = value;
+          MockRepositoryScope get scope => _scope;
+        }
+      </code></pre>
+
+      <p>After having such mock, you can use it to fake the interactions during test, and verify them</p>
+
+      <pre><code lang="dart">
+
+        MockRepository mockRepository;
+
+        setUpAll(() {
+          mockRepository = MockRepository();
+        });
+
+        test("Create the entity if scope is null", () async {
+          mockRepository.mockEntity = entity;
+          mockRepository.scope = null;
+
+          verify(mockRepository.create(MyEntity(), any)).called(1);
+          verify(mockRepository.get(mockRepository.scope)).called(1);
+        });
+
+      </code></pre>
+
+    </google-codelab-step>
 
   </google-codelab>
-          <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
-          <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
-          <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
-          <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
-          <script src="//support.google.com/inapp/api.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
 </body>
+
 </html>
